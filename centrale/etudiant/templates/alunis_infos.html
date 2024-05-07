@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Infos{% endblock %}
+{% block link %}
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/alumnis_indiv.css' %}">
+    <link rel="stylesheet" href="{% static 'css/log_out.css' %}">
+{% endblock %}
+{% block content %}
+<div class="text1">
+  <img src="{% static 'images/OIP.jpeg' %}" alt="" class="round-img"> <span id="nom_prenoms"><em>Nom & Prenoms</em></span>
+</div>
+<br>
+<div class="Information">
+<h2><em><span class="info"><center>Information </center></span></em></h2>
+ 
+ <h3><em> <center>Parcours accademique (ECC):</center></em></h3>
+ 
+   <div class="parcours">
+    <em>Nous avons le devoir moral et éthique de préserver la diversité de la vie sur Terre pour les générations futures. En protégeant la biodiversité, nous préservons la beauté et la richesse de notre planète, ainsi que les innombrables services qu'elle nous rend</em>
+   </div>
+</p>
+<br>
+<p>
+  <span id="logo_mail"><img src="{% static 'images/email-1.webp' %}" alt=""></span> <a href="mailto: landrybiaou02@gmail.com"><span id="mail"><i>landrybiaou02@gmail.com</i></span></a>
+</p>
+<p>
+  <span id="logo_tél"><img src= "{% static 'images/tél.png' %}" alt=""></span> <span id="tél"><i>+2120704506255</i></span>
+</p>
+<p>
+  <span id="logo_loc"><img src= "{% static 'images/localisation.webp' %}" alt=""></span> <span id="loc"><a href="https://www.google.com/maps/place/%C3%89cole+centrale+Casablanca/@33.4800803,-7.6226301,17z/data=!3m1!4b1!4m6!3m5!1s0xda62dfb0bd98e83:0x6c5587c807a6f58e!8m2!3d33.4800758!4d-7.6204414!16s%2Fg%2F11b6_gwjxz"><i>Ville verte Coté Latéral Est a la foret Bouskoura, Casablanca</i></a></span>
+</p>
+</div>
+<div class="Secteurs">
+
+<details>
+<summary><i>Secteurs</i></summary>
+<p>Mecanique, <br> Mecatronique, <br>Energie, <br>DataScientist</p>
+</details>
+
+</div>
+
+<div class="stage_1">
+<details>
+  <summary><i>Stage 1A</i></summary>
+  <p>Entreprise: Vinci Energie <br> secteurs: Energie</p>
+</details>
+</div>
+<div class="stage_2">
+  <details>
+    <summary><i>Stage 2A</i></summary>
+    <p>Entreprise: LaFage <br> secteurs: Energie</p>
+  </details>
+</div>
+
+<div class="stage_PFE">
+<details>
+  <summary><i>PFE</i></summary>
+<p>Entreprise: LaFage <br> secteurs: Mecanique</p>
+</details>
+</div>
+
+<div class="Emploi">
+<details>
+  <summary><i>Emploi</i></summary>
+<p>Entreprise: LaFage <br> secteurs: Mecanique</p>
+</details>
+</div>
+
+
+</div>
+
+{% endblock %}
+    

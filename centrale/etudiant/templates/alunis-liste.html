@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Alumnis{% endblock %}
+{% block link %}
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+<link rel="stylesheet" href="{% static 'css/alumnis_style.css' %}">
+<link rel="stylesheet" href="{% static 'css/log_out.css' %}">
+<link rel="stylesheet" href="{% static 'css/style_carousel.css' %}">
+{% endblock %} 
+
+
+{% block content %}
+<div class="barre-recherche">
+    <input type="text" placeholder="Reach...">
+    <button type="submit">Reach</button>
+ </div>
+<div class="arrange">
+    <a href= "{% url 'alunis_infos' %}"><img src= "icone/R1.jpeg" alt="" class="round-img"> 
+      <span id="noms"> Biaou Adebayo Landry </span></a>
+  </div>
+  <div class="arrange">
+    <a href= "{% url 'alunis_infos' %}"><img src= "icone/R1.jpeg" alt="" class="round-img"> 
+      <span id="noms"> Biaou Adebayo Landry </span></a>
+  </div>
+  <div class="arrange">
+    <a href= "{% url 'alunis_infos' %}"><img src= "icone/R1.jpeg" alt="" class="round-img"> 
+      <span id="noms"> Biaou Adebayo Landry </span></a>
+  </div>
+  <div class="arrange">
+    <a href= "{% url 'alunis_infos' %}"><img src= "icone/R1.jpeg" alt="" class="round-img"> 
+      <span id="noms"> Biaou Adebayo Landry </span></a>
+  </div>
+  <div class="arrange">
+    <a href= "{% url 'alunis_infos' %}"><img src= "icone/R1.jpeg" alt="" class="round-img"> 
+      <span id="noms"> Biaou Adebayo Landry </span></a>
+  </div>
+
+
+{% endblock %}

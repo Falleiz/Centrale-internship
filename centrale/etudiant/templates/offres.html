@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Offre{% endblock %}
+{% block link %}
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+<link rel="stylesheet" href="{% static 'css/offre_pagestyle.css' %}">
+<link rel="stylesheet" href="{% static 'css/log_out.css' %}">
+<link rel="stylesheet" href="{% static 'css/style_carousel.css' %}">
+
+{% endblock %} 
+
+
+{% block content %}
+<div class="barre-recherche">
+    <input type="text" placeholder="Reach...">
+    <button type="submit">Reach</button>
+  </div>
+  
+  
+    <a href="{% url 'infos' %}">
+      <div class="entreprise">
+         <img src="{% static 'images/A.png' %}" alt="" class="image"> <p><i>Lorem ipsum dolor sit amet consectetur</i></p>
+      </div>
+    </a>
+    <a href="{% url 'infos' %}">
+      <div class="entreprise">
+         <img src="{% static 'images/M.jpg' %}" alt="" class="image"> <p><i>Lorem ipsum dolor sit amet consectetur</i></p>
+      </div>
+    </a>
+    <a href="{% url 'infos' %}">
+      <div class="entreprise">
+         <img src="{% static 'images/capgemini.png' %}" alt="" class="image"> <p><i>Lorem ipsum dolor sit amet consectetur</i></p>
+      </div>
+    </a>
+    <a href="{% url 'infos' %}">
+      <div class="entreprise">
+         <img src="{% static 'images/orange.png' %}" alt="" class="image"> <p><i>Lorem ipsum dolor sit amet consectetur</i></p>
+      </div>
+    </a>
+    <a href="{% url 'infos' %}">
+      <div class="entreprise">
+         <img src="{% static 'images/societe.png' %}" alt="" class="image"> <p><i>Lorem ipsum dolor sit amet consectetur</i></p>
+      </div>
+    </a>
+
+  
+    <div class="lieu">
+      <select name="lieu1" id="lieu1">
+         <option value="Bouskoura"><i>Bouskoura</i></option>
+         <option value="Casablanca"><i>Casablanca</i></option>
+         <option value="Rabat"><i>Rabat</i></option>
+         <option value="Marrakech"><i>Marrakech</i></option>
+      </select>
+    </div>
+    <div class="Secteur">
+      <select name="lieu1" id="lieu1">
+         <option value="Bouskoura"><i>Mecanique</i></option>
+         <option value="Casablanca"><i> Mecatronique</i></option>
+         <option value="Rabat"><i>Energétique</i></option>
+         <option value="Marrakech"><i>Automobile</i></option>
+      </select>
+    </div>
+    <div class="type">
+      <select name="lieu1" id="lieu1">
+         <option value="Bouskoura"><i>Observateur</i></option>
+         <option value="Casablanca"><i>assistant ingénieur</i></option>
+         <option value="Rabat"><i> PFE</i></option>
+         <option value="Marrakech"><i>PFE</i></option>
+      </select>
+    </div>
+   <div>
+      <h3 class="tex1">Secteur:</h3>
+   </div>
+   <div>
+     <h3 class="tex2">Type:</h3>
+   </div>
+   <div>
+     <h3 class="tex3">Lieu:</h3>
+   </div>
+      
+    </i>
+
+  </div>
+ 
+
+
+
+{% endblock %}
