@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required  # For protecting views
 from .models import Users
 def login_user(request):
-    return render(request,'login.html')
+    return render(request,'login_page.html')
 
 
 def do_login_user(request):
@@ -20,11 +20,11 @@ def do_login_user(request):
                     return redirect('home/')
             except :
 
-                return render(request, 'login.html', {'error': 'Invalid username or password'})
+                return render(request, 'login_page.html', {'error': 'Invalid username or password'})
 
                      
            
-    return render(request, 'login.html')
+    return render(request, 'login_page.html')
 
 def home(request):
     user=request.user
