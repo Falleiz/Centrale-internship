@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Infos{% endblock %}
+{% block link %}
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+<link rel="stylesheet" href="{% static 'css/entreprise_description_style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/' %}">
+    <link rel="stylesheet" href="{% static 'css/log_out.css' %}">
+
+{% endblock %}
+
+{% block content %}
+
+<div class="Secteur">
+    <h2>
+     Secteur : {{entreprise.secteur.nom}}
+    </h2>
+  </div>
+
+  <div class="Description">
+    <i>
+      <h3>
+        Description
+      </h3>
+    </i>
+  </div>
+
+  <div>
+      <img src="{{entreprise.logo_url}}"  alt="" class="image">
+  </div>
+
+  <div class="desc">
+    {{entreprise.description}}
+  </div>
+
+
+
+
+{% endblock %}

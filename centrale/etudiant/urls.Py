@@ -11,9 +11,9 @@ urlpatterns =[
    path('secteur/',views.secteur_page,name='secteur'),
    path('offres/',views.offer_page,name='offres'),
    path('entreprise/',views.entreprise_page,name='entreprise'),
+   path('entreprise/<int:object_id>/',views.entreprise_description,name='entreprise_description'),
    path('entretien/',views.entretien_page,name='entretien'),
-   path('infos/',views.offer_description,name='infos'),
-   path('infos_alunis/',views.alunis_infos_page,name='alunis_infos'),
-
-     
+   path('infos/<int:object_id>/',views.offer_description,name='infos'),
+   path('infos_alunis/<int:object_id>/',views.alunis_infos_page,name='alunis_infos'),
+  
 ]

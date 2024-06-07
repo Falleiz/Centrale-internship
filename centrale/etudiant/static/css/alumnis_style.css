@@ -1,187 +1,16 @@
-#alunis_page {
-    background-color:#00A986;
- 
- }
- 
- /*---------------------------------------------------------------- */
- /*ETudiant.html block main*/
-div.menu{
-    position:relative;
-    background-color:#F5F5F5 ;
-    margin-top:5%;
-    margin-left: 10%;
-    padding-right: 4%;
-    height: 85%;
-}
-
-div.pyramid-loader{
-    margin-left: 30%;
-}
-
-/*Partie Accueil usser*/
-#ligne1{
-    display:absolute;
-    margin-top: 5%;
-    margin-left: 2%;
-}
-span.accueil_user{
-    align-items: center;
-    display: flex;
-}
-
-#ligne2{
-    display:flex;
-    height: 80%;
-}
-/*Partie secteur*/
-
-div.colonne1{
-   
-    background-color: #FFFFFF;
-    width:30% ;
-    height:20% ;
-   
-}
-span.secteur{
-    display:flex;
-    align-items: center;
-    margin-top: 0%;
-    justify-content: center;
-    
-
-}
-svg.secteur{
-    color:#00A986;
-    width: 10%;
-    height: 10%;
-    
-
-}
-
-
-p.secteur{
-    font-size:100% ;
-    font-weight: bold;
-    color:#00A986
-}
-
-div.secteur{
-    display:flex;
-    position:relative;
-    justify-content: center;
-    padding-top: 30%;
-    padding-bottom: 0%;
-    
-}
-#choisir_secteur{
-    background-color: #00A986;
-    border-color: #00A986;
-    border-radius: 5%;
-}
-/*Partie offres de stage*/
-div.partie_annonce{
-    position: absolute;
-    background-color: #FFFFFF;
-    margin-left: 40%;
-    height:30%;
-    border-radius: 5px;   
-}
-svg.annonce{
-    width:10%;
-    height:10%;
-    color:#00A986;
-}
-div.annonce_title{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-p.annonce_title{
-    color:#00A986;
-    font-weight: bold;
-}
-/*Partie planning*/
-div.ligne3{
-    background-color: #FFFFFF;
-    position:absolute;
-    margin-top:5%;
-    margin-right:10%;
-    width:50%;
-    height:30%;
-    border-radius: 10px;
-}
-div.planning{
-    display:flex;
-    align-items: center;
-    position:relative;
-    justify-content: center;
-    
-}
-p.titlte{
-    font-weight: bold;
-    color:#00A986;
-    font-size: medium ;
-
-}
-svg.planning{
-    width:5%;
-    height:5%;
-    color:#00A986;
-}
-
-
-
-/*---------------------------------------------------------------- */
-
-
-/* Partie */
-#aide{
-    position:relative;
-    border-radius: 20px;
-    height: 20%;
-    width:90%;
-    background-color: #FFFFFF;
-    text-align:center,justify;
-    padding: 30px;
-    margin-left: 7%;
-}
-#aide_text{
-    color:#00A986;
-    text-align: center;
-    text-decoration: underline;
-}
-
-
-.round-img {
-    margin-left: 50px;
-    margin-top: 10px;
-    border-radius: 50%; /* Cette propriété définira la forme de l'image en rond */
-    width: 110px; /* Largeur de l'image */
-    height: 110px; /* Hauteur de l'image */
-    object-fit: cover; /* Pour s'assurer que l'image remplit complètement le cadre rond */
-  }
-
-
-
-  .barre_de_recherche{
-    margin: 10px;
-    background-color: darkgray;
-    height: 100px;
-    width: 300px;
-    border-radius: 10px;
-
-}
-
 .barre-recherche {
+    position: relative;
     display: flex;
-    align-items: center; /* Alignement vertical */
+    align-items: center;
+    margin-bottom: 20px;
+    margin-top: 30px;
+    margin-left: 10%;
 }
 
 .barre-recherche input[type="text"] {
-    margin:20px 100px;
-    height: 30px; /* Réduire la hauteur de la zone de saisie */
-    width: 300px; /* Réduire la largeur de la zone de saisie */
-    padding: 10px;
+    height: 30px;
+    width: 300px;
+    padding: 5px;
     border: none;
     border-radius: 8px;
     background-color: rgb(234, 230, 230);
@@ -189,10 +18,8 @@ svg.planning{
     opacity: 0.7;
 }
 
-
 .barre-recherche button {
-    margin: 10px 150px;
-    margin-left: 10px; /* Espacement entre la zone de saisie et le bouton */
+    margin-left: 10px;
     background-color: #007bff;
     color: white;
     border: none;
@@ -205,33 +32,67 @@ svg.planning{
     background-color: #0056b3;
 }
 
-#noms{
+.filters {
+    position: relative;
+    margin-top: 5%;
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.filters input[type="text"] {
+    margin-right: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 200px;
+}
+
+.filters button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.filters button:hover {
+    background-color: #0056b3;
+}
+
+#noms {
     background-color: lightgreen;
     width: 190px;
     height: 40px;
     padding: 8px;
     display: flex;
-    
 }
 
-.arrange{
+.arrange {
     position: relative;
     left: 0px;
     width: 205px;
     background-color: #f1eded;
     text-align: justify;
-    float: left ;
+    float: left;
     margin: 10px 20px;
     cursor: pointer;
     justify-content: space-between;
 }
 
-.arrange:hover{
-    background-color:lightgreen;
+.arrange:hover {
+    background-color: lightgreen;
 }
 
+.round-img {
+    margin-left: 50px;
+    margin-top: 10px;
+    border-radius: 50%;
+    width: 110px;
+    height: 110px;
+    object-fit: cover;
+}
 
-/* ----------------------------------------------------------------*/
 footer {
     top: 95%;
     position: fixed;

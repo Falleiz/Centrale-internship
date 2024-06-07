@@ -159,53 +159,20 @@
           </div>
           <div class="carousel">
             <div class="carousel-inner">
+              {% for object in offre %}
                 <div class="carousel-item">
                     <div class="image">
-                        <img src="https://th.bing.com/th/id/R.69066a17b152219b7f2d46f59d72f516?rik=KuyY9G1bXGQvCg&pid=ImgRaw&r=0" alt="Slide 1">
+                        <img src="{{object.logo_url}}" alt="Slide 1">
                     </div>
                     <div class="infos">
                         <span class="infos">
                             <button class="infos">
-                                <a href="{% url 'infos' %}" class="infos">voir plus</a>
-                            </button>
-                            <button class="infos">
-                                <a href="" class="infos">postuler</a>
-                            </button>
+                                <a href="{% url 'infos' object.id %}" class="infos">voir plus</a>
+                            </button>   
                         </span>
                     </div>
                 </div>
-                <div class="carousel-item">
-                    <div class="image">
-                        <img src="https://th.bing.com/th/id/OIP.LpYXZOzY0ElTpq3TNh7CUgHaCF?rs=1&pid=ImgDetMain" alt="Slide 2">
-                        
-                    </div>
-                    <div class="infos">
-                      <span class="infos">
-                        <button class="infos">
-                            <a href="{% url 'infos' %}" class="infos">voir plus</a>
-                        </button>
-                        <button class="infos">
-                            <a href="#" class="infos">postuler</a>
-                        </button>
-                    </span>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="image">
-                        <img src="https://download.logo.wine/logo/Royal_Air_Maroc/Royal_Air_Maroc-Logo.wine.png " alt="Slide 3">
-                    </div>
-                    <div class="infos">
-                      <span class="infos">
-                        <button class="infos">
-                            <a href="{% url 'infos' %}" class="infos">voir plus</a>
-                        </button>
-                        <button class="infos">
-                            <a href="#" class="infos">postuler</a>
-                        </button>
-                    </span>
-
-                    </div>
-                </div>
+                {% endfor%}
             </div>
             <div class="carousel-nav">
                 <button class="carousel-prev" onclick="prevSlide()">&#10094;</button>

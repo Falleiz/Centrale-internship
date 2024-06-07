@@ -12,67 +12,33 @@
 
 
 {% block content %}
-<div class="barre-recherche">
+<form method='get', action='.'>
+  <div class="barre-recherche">
     <input type="text" placeholder="Reach...">
     <button type="submit">Reach</button>
   </div>
+</form>
   
-  
-    <a href="">
+  {% for entreprise in all_entreprise %}
+    <a href="{% url 'entreprise_description' entreprise.id %}">
       <div class="entreprise">
-         <img src="icone/R.jpg" alt="" class="image"> <p><i>Lorem ipsum dolor sit amet consectetur</i></p>
+         <img src="{{entreprise.logo_url}}" alt="" class="image"> 
+         <p><i>{{entreprise.nom}}</i></p>
       </div>
     </a>
-    <a href="">
-      <div class="entreprise">
-         <img src="{% static 'images/M.jpg' %}" alt="" class="image"> <p><i>Lorem ipsum dolor sit amet consectetur</i></p>
-      </div>
-    </a>
-    <a href="">
-      <div class="entreprise">
-         <img src="{% static 'images/A.png' %}" alt="" class="image"> <p><i>Lorem ipsum dolor sit amet consectetur</i></p>
-      </div>
-    </a>
-    <a href="">
-      <div class="entreprise">
-         <img src="{% static 'images/orange.png' %}" alt="" class="image"> <p><i>Lorem ipsum dolor sit amet consectetur</i></p>
-      </div>
-    </a>
-    <a href="">
-      <div class="entreprise">
-         <img src="icone/R.png" alt="" class="image"> <p><i>Lorem ipsum dolor sit amet consectetur</i></p>
-      </div>
-    </a>
+  {% endfor%}
 
-  
-    <div class="lieu">
-      <select name="lieu1" id="lieu1">
-         <option value="Bouskoura"><i>Bouskoura</i></option>
-         <option value="Casablanca"><i>Casablanca</i></option>
-         <option value="Rabat"><i>Rabat</i></option>
-         <option value="Marrakech"><i>Marrakech</i></option>
-      </select>
-    </div>
-    <div class="Secteur">
-      <select name="lieu1" id="lieu1">
-         <option value="Bouskoura"><i>Mecanique</i></option>
-         <option value="Casablanca"><i> Mecatronique</i></option>
-         <option value="Rabat"><i>Energétique</i></option>
-         <option value="Marrakech"><i>Automobile</i></option>
-      </select>
-    </div>
-    
-   <div>
-      <h3 class="tex1">Secteur:</h3>
-   </div>
-   
-   <div>
-     <h3 class="tex3">Lieu:</h3>
-   </div>
-      
-    </i>
-
+ <form method='get'action='.' >
+  <div class="lieu">
+    <input type="text" name="search" value="{{ search_query }}" placeholder="Rechercher par nom...">
+    <button type="submit">Rechercher</button>
   </div>
+  <div class="Secteur">
+    <input type="text" name="search" value="{{ search_query }}" placeholder="Rechercher par nom...">
+    <button type="submit">Rechercher</button>
+  </div>
+</div>
+ </form>
  
 
 

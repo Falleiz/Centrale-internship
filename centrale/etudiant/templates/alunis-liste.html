@@ -3,38 +3,36 @@
 {% block title %}Alumnis{% endblock %}
 {% block link %}
 <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-
 <link rel="stylesheet" href="{% static 'css/alumnis_style.css' %}">
 <link rel="stylesheet" href="{% static 'css/log_out.css' %}">
 <link rel="stylesheet" href="{% static 'css/style_carousel.css' %}">
-{% endblock %} 
-
+{% endblock %}
 
 {% block content %}
-<div class="barre-recherche">
-    <input type="text" placeholder="Reach...">
-    <button type="submit">Reach</button>
- </div>
-<div class="arrange">
-    <a href= "{% url 'alunis_infos' %}"><img src= "icone/R1.jpeg" alt="" class="round-img"> 
-      <span id="noms"> Biaou Adebayo Landry </span></a>
-  </div>
-  <div class="arrange">
-    <a href= "{% url 'alunis_infos' %}"><img src= "icone/R1.jpeg" alt="" class="round-img"> 
-      <span id="noms"> Biaou Adebayo Landry </span></a>
-  </div>
-  <div class="arrange">
-    <a href= "{% url 'alunis_infos' %}"><img src= "icone/R1.jpeg" alt="" class="round-img"> 
-      <span id="noms"> Biaou Adebayo Landry </span></a>
-  </div>
-  <div class="arrange">
-    <a href= "{% url 'alunis_infos' %}"><img src= "icone/R1.jpeg" alt="" class="round-img"> 
-      <span id="noms"> Biaou Adebayo Landry </span></a>
-  </div>
-  <div class="arrange">
-    <a href= "{% url 'alunis_infos' %}"><img src= "icone/R1.jpeg" alt="" class="round-img"> 
-      <span id="noms"> Biaou Adebayo Landry </span></a>
-  </div>
+<form method="get" action=".">
+    <div class="barre-recherche">
+        <input type="text" name="search" value="{{ search_query }}" placeholder="Rechercher par nom...">
+        <button type="submit">Rechercher</button>
+    </div>
+    <div class="filters">
+        <input type="text" name="company" value="{{ company_filter }}" placeholder="Entreprise">
+        <button type="submit">Filtrer</button>
+        <input type="text" name="sector" value="{{ sector_filter }}" placeholder="Secteur">
+        <button type="submit">Filtrer</button>
+        
+    </div>
+</form>
 
-
+<div id="alumni-list">
+    {% for object in all_object %}
+    <div class="arrange" data-name="{{ object.nom }} {{ object.prenom }}" data-company="{{ object.stage_1A.entreprise.nom }} {{ object.stage_2A.entreprise.nom }} {{ object.stage_3A.entreprise.nom }}" data-sector="{{ object.stage_1A.secteur.nom }} {{ object.stage_2A.secteur.nom }} {{ object.stage_3A.secteur.nom }}">
+        <a href="{% url 'alunis_infos' object.id %}">
+            {% if object.photo %}
+            <img src="{{ object.photo.url }}" alt="" class="round-img">
+            {% endif %}
+            <span id="noms">{{ object.nom }} {{ object.prenom }}</span>
+        </a>
+    </div>
+    {% endfor %}
+</div>
 {% endblock %}

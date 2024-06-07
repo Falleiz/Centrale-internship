@@ -10,19 +10,19 @@
 
 {% block content %}
 <div>
-  <a href=""> <img src="C:\Users\admin\Pictures\OIP.jpeg"  class="image" alt=""></a>
+  <a href=""> <img src="{{object.logo_url}}"  class="image" alt=""></a>
  </div>
  <div class="text1">
-   <h3> <i>Intitulé du stage</i></h3>
+   <h3> <i>{{object.titre}}</i></h3>
  </div>
  <div class="text2">
-   <h3><i>Secteur</i></h3>
+   <h3><i>{{object.secteur}}</i></h3>
  </div>
  <div class="text3">
-   <h3><i>Lieu</i></h3>
+   <h3><i>{{object.ville}}</i></h3>
  </div>
  <div class="text4">
-   <h3> <i>Mail Recruteur</i></h3>
+   <h3> <i>{{object.RH_email}}</i></h3>
  </div>
  <div class="text5">
    <h2> <i>Candidature</i></h2>
@@ -32,10 +32,7 @@
      <i>More information</i>
    </h4>
      <p>
-       Lorem ipsum dolor sit, amet consectetur adipisicing elit. Facere, reiciendis. Quae provident quas at asperiores sequi. Cumque cupiditate natus quis excepturi, sunt quas dicta, id, error aspernatur pariatur voluptatem. Vel!
-       Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda explicabo aperiam blanditiis, amet a commodi voluptate reiciendis illum magni labore neque atque mollitia et. Vel optio delectus voluptate corporis quos.
-       Lorem ipsum dolor sit, amet consectetur adipisicing elit. Facere, reiciendis. Quae provident quas at asperiores sequi. Cumque cupiditate natus quis excepturi, sunt quas dicta, id, error aspernatur pariatur voluptatem. Vel!
-       Lorem ipsum dolor sit amet consectetur
+      {{object.description}}
      </p>
  </div>
 
