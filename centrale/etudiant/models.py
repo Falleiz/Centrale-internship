@@ -89,9 +89,10 @@ class Alumnis(models.Model):
 
 
 class Candidature(models.Model):
-    Offre=models.ForeignKey(Offre_de_stage,on_delete=models.CASCADE)
-    etudiant=models.ForeignKey(Users,on_delete=models.CASCADE)
-    cv=models.FileField(name='CV')
-    lettre=models.FileField(name='Lettre de motivation')
+    Offre = models.ForeignKey('Offre_de_stage', on_delete=models.CASCADE)
+    etudiant = models.ForeignKey('Users', on_delete=models.CASCADE)
+    cv = models.FileField(upload_to='cvs/',default=None)
+    lettre = models.FileField(upload_to='lettres/',default=None)
+
     def __str__(self):
-        return self.etudiant.first_name +' '+self.etudiant.last_name
+        return f"{self.etudiant.first_name} {self.etudiant.last_name}"

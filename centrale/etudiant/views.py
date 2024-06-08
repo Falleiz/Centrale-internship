@@ -2,9 +2,12 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.neighbors import NearestNeighbors
 import pandas as pd
 from django.shortcuts import render, redirect,get_object_or_404
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import get_user_model
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required  # For protecting views
-from .models import Users,Alumnis,Offre_de_stage,Entreprise,Secteur
+from .models import Users,Alumnis,Offre_de_stage,Entreprise,Secteur,Candidature
+from .forms import CandidatureForm
 def login_user(request):
     return render(request,'login_page.html')
 
@@ -37,13 +40,15 @@ def home(request):
 def log_out(request):
      logout(request)
      return redirect('login')
-
+ 
+@login_required
 def aide_page(request):
     return render(request, 'aide.html')
 
 from django.shortcuts import render
 from .models import Alumnis, Stage
 
+@login_required
 def alumnis_page(request):
     search_query = request.GET.get('search', '')
     company_filter = request.GET.get('company', '')
@@ -75,7 +80,7 @@ def alumnis_page(request):
         'company_filter': company_filter,
         'sector_filter': sector_filter,
     })
-
+@login_required
 def secteur_page(request):
     search_query = request.GET.get('search', '')
     print('je suis')
@@ -86,6 +91,8 @@ def secteur_page(request):
     
     return render(request, 'secteur.html', {'all_secteur': all_secteur, 'search_query': search_query})
 
+
+@login_required
 def secteur_description(request,object_id):
     secteur=get_object_or_404(Secteur,id=object_id)
         #Partie recommendation de cours 
@@ -117,7 +124,7 @@ def secteur_description(request,object_id):
 
     return render(request,'secteur_description.html',{'secteur': secteur,'recommended_courses':recommended_courses})
     
-    
+@login_required  
 def offer_page(request):
     search_query = request.GET.get('search', '')
     location_filter = request.GET.get('lieu', '')
@@ -149,7 +156,8 @@ def offer_page(request):
         'entreprises': entreprises,
         'type_filter':type_filter
     })
-    
+
+@login_required    
 def entreprise_page(request):
     search_query = request.GET.get('search', '')
     sector_filter = request.GET.get('sector', '')
@@ -179,24 +187,44 @@ def entreprise_page(request):
     })
    
    
-
+@login_required
 def entreprise_description(request,object_id):
     entreprise=get_object_or_404(Entreprise,id=object_id)
     return render(request,'entreprise_description.html',{'entreprise': entreprise})
     
-    
+@login_required   
 def entretien_page(request):
     return render(request,'entretien.html')
 
+@login_required
 def offer_description(request,object_id):
     object = get_object_or_404(Offre_de_stage, id=object_id)
    
     return render(request,'description_offres.html',{'object': object})
 
+@login_required
 def alunis_infos_page(request,object_id):
     object = get_object_or_404(Alumnis, id=object_id)
     
     return render(request,'alunis_infos.html', {'object': object})
 
 
-
+User = get_user_model()
+@login_required
+def candidature_page(request, object_id):
+    user = request.user
+    user_instance = Users.objects.get(pk=request.user.pk)
+    offre = get_object_or_404(Offre_de_stage, id=object_id)
+    
+    if request.method == 'POST':
+        form = CandidatureForm(request.POST, request.FILES)
+        if form.is_valid():
+            candidature = form.save(commit=False)
+            candidature.etudiant = user_instance
+            candidature.Offre = offre
+            candidature.save()
+            return redirect('offres')  # Redirigez vers une vue de succès appropriée
+    else:
+        form = CandidatureForm()
+    
+    return render(request, 'candidature.html', {'form': form, 'offre': offre})

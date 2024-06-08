@@ -16,5 +16,6 @@ urlpatterns =[
    path('entretien/',views.entretien_page,name='entretien'),
    path('infos/<int:object_id>/',views.offer_description,name='infos'),
    path('infos_alunis/<int:object_id>/',views.alunis_infos_page,name='alunis_infos'),
+   path('postuler/<int:object_id>',views.candidature_page,name='candidature')
   
 ]

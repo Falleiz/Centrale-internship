@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block link %}
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+<link rel="stylesheet" href="{% static 'css/candidature.css' %}">
+<link rel="stylesheet" href="{% static 'css/offres_description.css' %}">
+<link rel="stylesheet" href="{% static 'css/log_out.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="candidature-form">
+    <h1 class='text'>Soumettre une Candidature</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit",id='soumettre'>Soumettre</button>
+    </form>
+</div>
+{% endblock %}

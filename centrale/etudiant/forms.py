@@ -1,9 +1,11 @@
 from django import forms
-from .models import Utilisateur
+from .models import Candidature
 
-class RegistrationForm(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput())  # Hide password input
-
+class CandidatureForm(forms.ModelForm):
     class Meta:
-        model = Utilisateur
-        fields = ['first_name', 'last_name', 'email', 'password']
+        model = Candidature
+        fields = ['cv', 'lettre']
+        widgets = {
+            'cv': forms.FileInput(attrs={'class': 'form-control'}),
+            'lettre': forms.FileInput(attrs={'class': 'form-control'}),
+        }

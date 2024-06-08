@@ -12,28 +12,34 @@
 <div>
   <a href=""> <img src="{{object.logo_url}}"  class="image" alt=""></a>
  </div>
- <div class="text1">
-   <h3> <i>{{object.titre}}</i></h3>
- </div>
- <div class="text2">
-   <h3><i>{{object.secteur}}</i></h3>
- </div>
- <div class="text3">
-   <h3><i>{{object.ville}}</i></h3>
- </div>
- <div class="text4">
-   <h3> <i>{{object.RH_email}}</i></h3>
- </div>
- <div class="text5">
-   <h2> <i>Candidature</i></h2>
- </div>
- <div class="text6">
-   <h4>
-     <i>More information</i>
-   </h4>
-     <p>
-      {{object.description}}
-     </p>
+ <div class='infos'> 
+    <div class="text1">
+      <h3> <i>{{object.titre}}</i></h3>
+    </div>
+    <div class="text2">
+      <h3><i>{{object.secteur}}</i></h3>
+    </div>
+    <div class="text3">
+      <h3><i>{{object.ville}}</i></h3>
+    </div>
+    <div class="text4">
+      <h3> <i>{{object.RH_email}}</i></h3>
+    </div>
+    <div class="text5">
+      <h2> <i><a href="{% url 'candidature' object.id %}"> Candidature</a></i></h2>
+    </div>
+    <div class="text6">
+      <h4>
+        <i>More information</i>
+      </h4>
+        <p>
+        {{object.description}}
+      </p>
+  </div>
+ 
+
+
+
  </div>
 
 {% endblock %}
