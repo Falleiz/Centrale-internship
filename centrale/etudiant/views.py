@@ -1,7 +1,10 @@
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.neighbors import NearestNeighbors
+import pandas as pd
 from django.shortcuts import render, redirect,get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required  # For protecting views
-from .models import Users,Alumnis,Offre_de_stage,Entreprise
+from .models import Users,Alumnis,Offre_de_stage,Entreprise,Secteur
 def login_user(request):
     return render(request,'login_page.html')
 
@@ -74,16 +77,108 @@ def alumnis_page(request):
     })
 
 def secteur_page(request):
-    return render(request,'secteur.html')
+    search_query = request.GET.get('search', '')
+    print('je suis')
+    if search_query:
+        all_secteur = Secteur.objects.filter(nom__icontains=search_query)
+    else:
+        all_secteur = Secteur.objects.all()
+    
+    return render(request, 'secteur.html', {'all_secteur': all_secteur, 'search_query': search_query})
 
-def offer_page(request):
-    offre=Offre_de_stage.objects.all()
-    return render(request,'offres.html',{'offre':offre})
+def secteur_description(request,object_id):
+    secteur=get_object_or_404(Secteur,id=object_id)
+        #Partie recommendation de cours 
+    df = pd.read_csv('media\modified_coursea_data.csv')
 
-def entreprise_page(request,):
-    all_entreprise= Entreprise.objects.all()
+    # Accept user input for preferences
+    user_preferences = secteur.nom
+
+    # Combine course titles and categories into a single text
+    course_data = df['course_title'] + " " + df['category']
+
+    # Initialize TF-IDF vectorizer and transform course data into feature vectors
+    tfidf_vectorizer = TfidfVectorizer()
+    course_features = tfidf_vectorizer.fit_transform(course_data)
+
+    # Train a Nearest Neighbors model using all the data
+    model = NearestNeighbors(n_neighbors=5, algorithm='brute', metric='cosine')
+    model.fit(course_features)
+
+    # Transform user preferences into a feature vector
+    user_vector = tfidf_vectorizer.transform([user_preferences])
+
+    # Find the nearest neighbors (similar courses) to the user preferences
+    distances, indices = model.kneighbors(user_vector)
+
+    # Get the titles of the recommended courses
+    recommended_courses = df.iloc[indices[0]]['course_title']
    
-    return render(request,'entreprise.html',{'all_entreprise': all_entreprise})
+
+    return render(request,'secteur_description.html',{'secteur': secteur,'recommended_courses':recommended_courses})
+    
+    
+def offer_page(request):
+    search_query = request.GET.get('search', '')
+    location_filter = request.GET.get('lieu', '')
+    sector_filter = request.GET.get('secteur', '')
+    type_filter = request.GET.get('type', '')
+    entreprise_filter = request.GET.get('entreprise', '')
+
+    offres = Offre_de_stage.objects.all()
+
+    if search_query:
+        offres = offres.filter(titre__icontains=search_query)
+
+    if location_filter:
+        offres = offres.filter(ville__icontains=location_filter)
+
+    if sector_filter:
+        offres = offres.filter(secteur__nom__icontains=sector_filter)
+
+    if type_filter:
+        offres = offres.filter(type_stage__icontains=type_filter)
+
+    if entreprise_filter:
+        offres = offres.filter(entrprise__nom__icontains=entreprise_filter)
+
+    entreprises = Entreprise.objects.all()
+
+    return render(request, 'offres.html', {
+        'offre': offres,
+        'entreprises': entreprises,
+        'type_filter':type_filter
+    })
+    
+def entreprise_page(request):
+    search_query = request.GET.get('search', '')
+    sector_filter = request.GET.get('sector', '')
+    location_filter = request.GET.get('location', '')
+
+    all_entreprise = Entreprise.objects.all()
+
+    if search_query:
+        all_entreprise = all_entreprise.filter(nom__icontains=search_query)
+
+    if sector_filter:
+        all_entreprise = all_entreprise.filter(secteur__nom__icontains=sector_filter)
+
+    if location_filter:
+        all_entreprise = all_entreprise.filter(ville__icontains=location_filter)
+
+    sectors = Secteur.objects.all()
+    locations = Entreprise.objects.values_list('ville', flat=True).distinct()
+
+    return render(request, 'entreprise.html', {
+        'all_entreprise': all_entreprise,
+        'sectors': sectors,
+        'locations': locations,
+        'search_query': search_query,
+        'sector_filter': sector_filter,
+        'location_filter': location_filter,
+    })
+   
+   
 
 def entreprise_description(request,object_id):
     entreprise=get_object_or_404(Entreprise,id=object_id)
@@ -102,3 +197,6 @@ def alunis_infos_page(request,object_id):
     object = get_object_or_404(Alumnis, id=object_id)
     
     return render(request,'alunis_infos.html', {'object': object})
+
+
+

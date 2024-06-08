@@ -3,70 +3,41 @@
 {% block title %}Offre{% endblock %}
 {% block link %}
 <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-
 <link rel="stylesheet" href="{% static 'css/offre_pagestyle.css' %}">
 <link rel="stylesheet" href="{% static 'css/log_out.css' %}">
 <link rel="stylesheet" href="{% static 'css/style_carousel.css' %}">
-
-{% endblock %} 
-
+{% endblock %}
 
 {% block content %}
-<div class="barre-recherche">
-    <input type="text" placeholder="Reach...">
-    <button type="submit">Reach</button>
-  </div>
-  
-  
-    
-      {% for object in offre %}
-      <a href="{% url 'infos' object.id %}">
-      <div class="entreprise">
-         <img src="{{object.logo_url}}" alt="" class="image"> 
-         <p><i>{{object.titre}}</i></p>
-      </div>   
+    <form method="GET" action=".">
+      <div class='formulaire'>
+        <input type="text" name="lieu" id="lieu" placeholder="Lieu" list="lieux">
+        <input type="text" name="secteur" id="secteur" placeholder="Secteur" list="secteurs">
+        <label for="type">Type :</label>
+        <select id="type" name="type">
+          <option value=""> </option>
+            <option value="OBS">Observation</option>
+            <option value="ASS_ENG">Assistant Ingenieur</option>
+            <option value="PFE">Projet de fin d'étude</option>
+            <option value="RES">Recherche</option>
+        </select>
+        <input type="text" name="entreprise" id="entreprise" placeholder="Entreprise" list="entreprises">
+      </div>
+      <button type="submit" id='submit'>Rechercher</button>   
+    </form>
+
+<div class="offres-liste" class='offres_list'>
+    {% for object in offre %}
+    <div class="offre">
+      <a href="{% url 'infos' object.id %}"clas='entreprise'>
+        <div class="entreprise">
+            <img src="{{ object.logo_url }}" alt="" class="image">
+            <p><i>{{ object.titre }}</i></p>
+            <p><i>Date de publication : {{ object.date_de_publication }}</i></p>
+        </div>
     </a>
+    </div>
     {% endfor %}
-  
-    <div class="lieu">
-      <select name="lieu1" id="lieu1">
-         <option value="Bouskoura"><i>Bouskoura</i></option>
-         <option value="Casablanca"><i>Casablanca</i></option>
-         <option value="Rabat"><i>Rabat</i></option>
-         <option value="Marrakech"><i>Marrakech</i></option>
-      </select>
-    </div>
-    <div class="Secteur">
-      <select name="lieu1" id="lieu1">
-         <option value="Bouskoura"><i>Mecanique</i></option>
-         <option value="Casablanca"><i> Mecatronique</i></option>
-         <option value="Rabat"><i>Energétique</i></option>
-         <option value="Marrakech"><i>Automobile</i></option>
-      </select>
-    </div>
-    <div class="type">
-      <select name="lieu1" id="lieu1">
-         <option value="Bouskoura"><i>Observateur</i></option>
-         <option value="Casablanca"><i>assistant ingénieur</i></option>
-         <option value="Rabat"><i> PFE</i></option>
-         <option value="Marrakech"><i>PFE</i></option>
-      </select>
-    </div>
-   <div>
-      <h3 class="tex1">Secteur:</h3>
-   </div>
-   <div>
-     <h3 class="tex2">Type:</h3>
-   </div>
-   <div>
-     <h3 class="tex3">Lieu:</h3>
-   </div>
-      
-    </i>
-
-  </div>
- 
-
-
+</div>
 
 {% endblock %}

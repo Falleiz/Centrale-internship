@@ -3,44 +3,34 @@
 {% block title %}Entreprise{% endblock %}
 {% block link %}
 <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-
 <link rel="stylesheet" href="{% static 'css/entreprise_style.css' %}">
 <link rel="stylesheet" href="{% static 'css/log_out.css' %}">
 <link rel="stylesheet" href="{% static 'css/style_carousel.css' %}">
-
-{% endblock %} 
-
+{% endblock %}
 
 {% block content %}
-<form method='get', action='.'>
+<form method="get" action=".">
   <div class="barre-recherche">
-    <input type="text" placeholder="Reach...">
-    <button type="submit">Reach</button>
+    <input type="text" name="search" value="{{ search_query }}" placeholder="Rechercher par nom...">
+    <button type="submit">Rechercher</button>
+  </div>
+  <div class="filters">
+    <div class="filter">
+      <input type="text" name="sector" value="{{ sector_filter }}" placeholder="Rechercher par secteur...">
+    </div>
+    <div class="filter">
+      <input type="text" name="location" value="{{ location_filter }}" placeholder="Rechercher par lieu...">
+    </div>
+    <button type="submit">Filtrer</button>
   </div>
 </form>
-  
-  {% for entreprise in all_entreprise %}
-    <a href="{% url 'entreprise_description' entreprise.id %}">
-      <div class="entreprise">
-         <img src="{{entreprise.logo_url}}" alt="" class="image"> 
-         <p><i>{{entreprise.nom}}</i></p>
-      </div>
-    </a>
-  {% endfor%}
 
- <form method='get'action='.' >
-  <div class="lieu">
-    <input type="text" name="search" value="{{ search_query }}" placeholder="Rechercher par nom...">
-    <button type="submit">Rechercher</button>
-  </div>
-  <div class="Secteur">
-    <input type="text" name="search" value="{{ search_query }}" placeholder="Rechercher par nom...">
-    <button type="submit">Rechercher</button>
-  </div>
-</div>
- </form>
- 
-
-
-
+{% for entreprise in all_entreprise %}
+  <a href="{% url 'entreprise_description' entreprise.id %}">
+    <div class="entreprise">
+       <img src="{{ entreprise.logo_url }}" alt="" class="image"> 
+       <p><i>{{ entreprise.nom }}</i></p>
+    </div>
+  </a>
+{% endfor %}
 {% endblock %}
