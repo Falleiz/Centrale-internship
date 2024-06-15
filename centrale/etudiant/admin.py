@@ -30,3 +30,14 @@ class AlumnisAdmin(admin.ModelAdmin):
 @admin.register(Candidature)
 class CandidatureAdmin(admin.ModelAdmin):
     pass
+
+
+#----------------------------------------------------------------------------------------------------------------
+#PARTIE SERVICE DE SCOLARITE
+from .models import Service_users
+@admin.register(Service_users)
+class Service_usersAdmin(admin.ModelAdmin):
+        list_display = ['first_name','last_name','email','password','username']
+
+    
+   

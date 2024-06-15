@@ -8,18 +8,11 @@ class Secteur(models.Model):
     description=models.TextField()
     def __str__(self):
         return self.nom
-    
-    
-    
+       
 class Users(User):
     secteur=models.ForeignKey(Secteur,on_delete=models.DO_NOTHING,null=True)
     def __str__(self):
         return self.last_name +' '+self.first_name
-
-
-
-
-
 
 
 class Entreprise(models.Model):
@@ -96,3 +89,13 @@ class Candidature(models.Model):
 
     def __str__(self):
         return f"{self.etudiant.first_name} {self.etudiant.last_name}"
+    
+    
+#-------------------------------------------------------------------------------------------------------------------#
+#PARTIE SERVICE STAGE   
+from django.db.models import Q
+
+
+class Service_users(User):
+     def __str__(self):
+        return self.last_name +' '+self.first_name

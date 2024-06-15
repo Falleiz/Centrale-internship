@@ -8,6 +8,10 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required  # For protecting views
 from .models import Users,Alumnis,Offre_de_stage,Entreprise,Secteur,Candidature
 from .forms import CandidatureForm
+
+
+def acceuil(request):
+    return render(request,'Accueil.html')
 def login_user(request):
     return render(request,'login_page.html')
 
@@ -228,3 +232,88 @@ def candidature_page(request, object_id):
         form = CandidatureForm()
     
     return render(request, 'candidature.html', {'form': form, 'offre': offre})
+
+
+
+#------------------------------------------------------------------------------------------------------------------#
+#Partie S_login page
+
+from .models import Service_users
+from django.db.models import Q
+from .forms import OffreDeStageForm
+
+def s_login(request):
+        if request.method == 'POST':
+            username = request.POST.get('name',None)
+            password=request.POST.get('password',None)
+            if username !=None and password !=None:
+                print(f'email_recuperer: {username}\n password: {password}')
+                try:
+                    user=Service_users.objects.get(username=username,password=password)
+                    if user:
+                        print(f'usrname:{user.get_username()}')
+                        login(request,user)
+                        return redirect('s_home/')
+                except :
+
+                    return render(request, 's_login.html', {'error': 'Invalid username or password'})
+
+
+        return render(request,'s_login.html')
+    
+
+def service_home(request):
+    user=request.user
+    return render(request, 'S_home.html',{'user':user})
+
+def s_offre_list(request):
+    query = request.GET.get('q', '')
+    filtre_titre = request.GET.get('titre', '')
+    filtre_entreprise = request.GET.get('entreprise', '')
+    filtre_secteur = request.GET.get('secteur', '')
+    filtre_duree = request.GET.get('duree', '')
+    filtre_type_stage = request.GET.get('type_stage', '')
+
+    offres = Offre_de_stage.objects.all()
+
+    if filtre_titre:
+        offres = offres.filter(titre__icontains=filtre_titre)
+    if filtre_entreprise:
+        offres = offres.filter(entrprise__nom__icontains=filtre_entreprise)
+    if filtre_secteur:
+        offres = offres.filter(secteur__nom__icontains=filtre_secteur)
+    if filtre_duree:
+        offres = offres.filter(durée__iexact=filtre_duree)
+    if filtre_type_stage:
+        offres = offres.filter(type_stage__iexact=filtre_type_stage)
+    if query:
+        offres = offres.filter(
+            Q(titre__icontains=query) |
+            Q(entrprise__nom__icontains=query) |
+            Q(secteur__nom__icontains=query) |
+            Q(durée__iexact=query) |
+            Q(type_stage__iexact=query)
+        )
+
+    return render(request, 's_offre_liste.html', {'offres': offres})
+
+
+
+def s_offre_modifier(request, id):
+    offre = get_object_or_404(Offre_de_stage, id=id)
+    if request.method == 'POST':
+        form = OffreDeStageForm(request.POST, instance=offre)
+        if form.is_valid():
+            form.save()
+            return redirect('s_offre_liste')
+    else:
+        form = OffreDeStageForm(instance=offre)
+    return render(request, 's_modifier_offre.html', {'form': form, 'offre': offre})
+
+
+def s_offre_supprimer(request, id):
+    offre = get_object_or_404(Offre_de_stage, id=id)
+    if request.method == 'POST':
+        offre.delete()
+        return redirect('s_offre_liste')
+    return render(request, 'supprimer_offre.html', {'offre': offre})

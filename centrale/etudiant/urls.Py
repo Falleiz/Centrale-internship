@@ -2,9 +2,11 @@ from django.urls import path
 from . import views
 
 urlpatterns =[
-   path('',views.do_login_user,name='login'),
+   #PARTIE ETUDIANT
+   path('',views.acceuil,name='acceuil'),
+   path('login_page/',views.do_login_user,name='login'),
    path('login/',views.login_user),
-   path('home/',views.home,name='home')   ,
+   path('login_page/home/',views.home,name='home')   ,
    path('aide/',views.aide_page,name='aide'),
    path('alunis/',views.alumnis_page,name='alumnis'),
    path('login/',views.log_out,name='log_out'),
@@ -16,6 +18,14 @@ urlpatterns =[
    path('entretien/',views.entretien_page,name='entretien'),
    path('infos/<int:object_id>/',views.offer_description,name='infos'),
    path('infos_alunis/<int:object_id>/',views.alunis_infos_page,name='alunis_infos'),
-   path('postuler/<int:object_id>',views.candidature_page,name='candidature')
-  
+   path('postuler/<int:object_id>',views.candidature_page,name='candidature'),
+   
+   #---------------------------------------------------------------------------------------------------------------#
+   #PARTIE SERVICE DE SCOLARITE
+   
+   path('s_login/',views.s_login,name='s_login'),
+   path('s_login/s_home/',views.service_home,name='service_home'),
+   path('s_offre_list/',views.s_offre_list,name='s_offre_liste'),
+   path('offres/<int:id>/modifier/', views.s_offre_modifier, name='s_offre_modifier'),  
+   path('offres/<int:id>/supprimer/', views.s_offre_supprimer, name='s_offre_supprimer'),
 ]
