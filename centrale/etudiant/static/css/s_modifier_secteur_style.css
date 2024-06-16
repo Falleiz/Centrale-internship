@@ -7,12 +7,14 @@ h1 {
 
 .form-container {
     background-color: #2E8B57;
+    /* Vert plus foncé pour un contraste agréable */
     padding: 30px;
     border-radius: 15px;
     max-width: 600px;
     margin: 20px auto;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     color: #ffffff;
+    /* Couleur du texte en blanc pour le contraste */
     font-family: 'Arial', sans-serif;
 }
 
@@ -36,7 +38,7 @@ form label {
 }
 
 form input[type="text"],
-form input[type="email"],
+form textarea,
 form select {
     flex: 2;
     padding: 12px;
@@ -49,7 +51,7 @@ form select {
 }
 
 form input[type="text"]::placeholder,
-form input[type="email"]::placeholder {
+form textarea::placeholder {
     color: #999999;
 }
 
@@ -60,10 +62,11 @@ form input[type="email"]::placeholder {
 }
 
 .btn-action {
+    margin-right: 2%;
     background-color: #ffffff;
     color: #2E8B57;
     border: 2px solid #ffffff;
-    padding: 12px 20px;
+    padding: 8px 8px;
     border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.3s ease;
@@ -73,11 +76,13 @@ form input[type="email"]::placeholder {
     text-align: center;
     display: inline-block;
     width: 48%;
+    /* Pour aligner les boutons sur une seule ligne */
 }
 
 .btn-action:hover {
     background-color: #ffffff;
     color: #228B22;
+    /* Couleur plus foncée pour le survol */
     transform: scale(1.05);
 }
 

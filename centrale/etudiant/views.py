@@ -240,7 +240,7 @@ def candidature_page(request, object_id):
 
 from .models import Service_users
 from django.db.models import Q
-from .forms import OffreDeStageForm
+from .forms import OffreDeStageForm,EntrepriseForm,SecteurForm, UserForm,AlumnisForm
 
 def s_login(request):
         if request.method == 'POST':
@@ -317,3 +317,188 @@ def s_offre_supprimer(request, id):
         offre.delete()
         return redirect('s_offre_liste')
     return render(request, 'supprimer_offre.html', {'offre': offre})
+
+def s_ajouter_offre(request):
+    if request.method == 'POST':
+        form = OffreDeStageForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('s_offre_liste')  
+    else:
+        form = OffreDeStageForm()
+    return render(request, 's_ajouter_offre.html', {'form': form})
+
+
+def s_enterprise_liste(request):
+    entreprises = Entreprise.objects.all()
+    
+    search_nom = request.GET.get('search_nom')
+    search_ville = request.GET.get('search_ville')
+    search_secteur = request.GET.get('search_secteur')
+
+    if search_nom:
+        entreprises = entreprises.filter(nom__icontains=search_nom)
+    if search_ville:
+        entreprises = entreprises.filter(ville__icontains=search_ville)
+    if search_secteur:
+        entreprises = entreprises.filter(secteur__nom__icontains=search_secteur)
+
+    secteurs = Secteur.objects.all()
+    
+    return render(request, 's_entreprises_liste.html', {'entreprises': entreprises, 'secteurs': secteurs})
+
+
+def entreprise_modifier(request, pk):
+    entreprise = get_object_or_404(Entreprise, pk=pk)
+    if request.method == "POST":
+        form = EntrepriseForm(request.POST, instance=entreprise)
+        if form.is_valid():
+            form.save()
+            return redirect('s_entrprise_liste')
+    else:
+        form = EntrepriseForm(instance=entreprise)
+    return render(request, 'entreprise_modifier.html', {'form': form})
+
+def entreprise_supprimer(request, pk):
+    entreprise = get_object_or_404(Entreprise, pk=pk)
+    if request.method == "POST":
+        entreprise.delete()
+        return redirect('s_entrprise_liste')
+    return render(request, 'entreprise_supprimer.html', {'entreprise': entreprise})
+
+def s_ajouter_entreprise(request):
+    if request.method == 'POST':
+        form = EntrepriseForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('s_entrprise_liste')
+    else:
+        form = EntrepriseForm()
+    return render(request, 's_ajouter_entreprise.html', {'form': form})
+
+
+def s_liste_secteur(request):
+    query = request.GET.get('search')
+    if query:
+        secteurs = Secteur.objects.filter(nom__icontains=query)
+    else:
+        secteurs = Secteur.objects.all()
+    return render(request, 's_liste_secteur.html', {'secteurs': secteurs})
+
+
+def ajouter_secteur(request):
+    if request.method == 'POST':
+        form = SecteurForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('s_liste_secteur')
+    else:
+        form = SecteurForm()
+    return render(request, 'ajouter_secteur.html', {'form': form})
+
+def supprimer_secteur(request, pk):
+    secteur = get_object_or_404(Secteur, pk=pk)
+    if request.method == 'POST':
+        secteur.delete()
+        return redirect('s_liste_secteur')
+    return render(request, 'supprimer_secteur.html', {'secteur': secteur})
+
+def modifier_secteur(request, pk):
+    secteur = get_object_or_404(Secteur, pk=pk)
+    if request.method == 'POST':
+        form = SecteurForm(request.POST, instance=secteur)
+        if form.is_valid():
+            form.save()
+            return redirect('s_liste_secteur')
+    else:
+        form = SecteurForm(instance=secteur)
+    return render(request, 'modifier_secteur.html', {'form': form, 'secteur': secteur})
+
+
+
+
+
+def liste_etudiants(request):
+    query = request.GET.get('search')
+    if query:
+        etudiants = Users.objects.filter(last_name__icontains=query) | Users.objects.filter(first_name__icontains=query)
+    else:
+        etudiants = Users.objects.all()
+    return render(request, 'liste_etudiants.html', {'etudiants': etudiants})
+
+
+def ajouter_etudiant(request):
+    if request.method == 'POST':
+        form = UserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('liste_etudiants')
+    else:
+        form = UserForm()
+    return render(request, 'ajouter_etudiant.html', {'form': form})
+
+def modifier_etudiant(request, pk):
+    etudiant = get_object_or_404(Users, pk=pk)
+    if request.method == 'POST':
+        form = UserForm(request.POST, instance=etudiant)
+        if form.is_valid():
+            form.save()
+            return redirect('liste_etudiants')
+    else:
+        form = UserForm(instance=etudiant)
+    return render(request, 'modifier_etudiant.html', {'form': form, 'etudiant': etudiant})
+
+def supprimer_etudiant(request, pk):
+    etudiant = get_object_or_404(Users, pk=pk)
+    if request.method == 'POST':
+        etudiant.delete()
+        return redirect('liste_etudiants')
+    return render(request, 'supprimer_etudiant.html', {'etudiant': etudiant})
+
+
+
+def liste_alumnis(request):
+    query = request.GET.get('search')
+    secteur = request.GET.get('secteur')
+    entreprise = request.GET.get('entreprise')
+    ville = request.GET.get('ville')
+
+    alumnis = Alumnis.objects.all()
+    if query:
+        alumnis = alumnis.filter(nom__icontains=query) | alumnis.filter(prenom__icontains=query)
+    if secteur:
+        alumnis = alumnis.filter(stage_1A__secteur__icontains=secteur) | alumnis.filter(stage_2A__secteur__icontains=secteur) | alumnis.filter(stage_3A__secteur__icontains=secteur) | alumnis.filter(emploi__secteur__icontains=secteur)
+    if entreprise:
+        alumnis = alumnis.filter(stage_1A__entreprise__icontains=entreprise) | alumnis.filter(stage_2A__entreprise__icontains=entreprise) | alumnis.filter(stage_3A__entreprise__icontains=entreprise) | alumnis.filter(emploi__entreprise__icontains=entreprise)
+    if ville:
+        alumnis = alumnis.filter(stage_1A__ville__icontains=ville) | alumnis.filter(stage_2A__ville__icontains=ville) | alumnis.filter(stage_3A__ville__icontains=ville) | alumnis.filter(emploi__ville__icontains=ville)
+
+    return render(request, 'liste_alumnis.html', {'alumnis': alumnis})
+
+def ajouter_alumnis(request):
+    if request.method == 'POST':
+        form = AlumnisForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('liste_alumnis')
+    else:
+        form = AlumnisForm()
+    return render(request, 'ajouter_alumnis.html', {'form': form})
+
+def modifier_alumnis(request, pk):
+    alumnis = get_object_or_404(Alumnis, pk=pk)
+    if request.method == 'POST':
+        form = AlumnisForm(request.POST, request.FILES, instance=alumnis)
+        if form.is_valid():
+            form.save()
+            return redirect('liste_alumnis')
+    else:
+        form = AlumnisForm(instance=alumnis)
+    return render(request, 'modifier_alumnis.html', {'form': form, 'alumnis': alumnis})
+
+def supprimer_alumnis(request, pk):
+    alumnis = get_object_or_404(Alumnis, pk=pk)
+    if request.method == 'POST':
+        alumnis.delete()
+        return redirect('liste_alumnis')
+    return render(request, 'supprimer_alumnis.html', {'alumnis': alumnis})

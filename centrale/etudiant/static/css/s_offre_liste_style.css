@@ -5,6 +5,10 @@ h1 {
     margin-left: 35%;
 }
 
+.btn-section {
+    margin-left: 45%;
+}
+
 .barre-recherche {
     display: flex;
     justify-content: center;

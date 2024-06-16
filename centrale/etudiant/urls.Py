@@ -28,4 +28,23 @@ urlpatterns =[
    path('s_offre_list/',views.s_offre_list,name='s_offre_liste'),
    path('offres/<int:id>/modifier/', views.s_offre_modifier, name='s_offre_modifier'),  
    path('offres/<int:id>/supprimer/', views.s_offre_supprimer, name='s_offre_supprimer'),
+   path('s_ajouter_offre/',views.s_ajouter_offre,name='s_ajouter_offre'),
+   path('liste/',views.s_enterprise_liste,name='s_entrprise_liste'),
+   path('entreprises/modifier/<int:pk>/', views.entreprise_modifier, name='entreprise_modifier'),
+   path('entreprises/supprimer/<int:pk>/', views.entreprise_supprimer, name='entreprise_supprimer'),
+   path('s_ajouter_entreprise/',views.s_ajouter_entreprise,name='s_ajouter_entreprise'),
+   path('s_list_secteur/',views.s_liste_secteur,name='s_liste_secteur'),
+   path('secteurs/ajouter/', views.ajouter_secteur, name='ajouter_secteur'),
+   path('secteurs/supprimer/<int:pk>/', views.supprimer_secteur, name='supprimer_secteur'), 
+     path('etudiants/',views.liste_etudiants, name='liste_etudiants'),
+   path('secteurs/modifier/<int:pk>/', views.modifier_secteur, name='modifier_secteur'),
+   path('etudiants/ajouter/', views.ajouter_etudiant, name='ajouter_etudiant'),
+    path('etudiants/modifier/<int:pk>/', views.modifier_etudiant, name='modifier_etudiant'),
+    path('etudiants/supprimer/<int:pk>/', views.supprimer_etudiant, name='supprimer_etudiant'),
+  path('alumnis/', views.liste_alumnis, name='liste_alumnis'),
+    path('alumnis/ajouter/', views.ajouter_alumnis, name='ajouter_alumnis'),
+    path('alumnis/modifier/<int:pk>/',views.modifier_alumnis, name='modifier_alumnis'),
+    path('alumnis/supprimer/<int:pk>/', views.supprimer_alumnis, name='supprimer_alumnis'),
+
+    
 ]

@@ -10,14 +10,14 @@ class Secteur(models.Model):
         return self.nom
        
 class Users(User):
-    secteur=models.ForeignKey(Secteur,on_delete=models.DO_NOTHING,null=True)
+    secteur=models.ForeignKey(Secteur,null=True, blank=True, on_delete=models.SET_NULL)
     def __str__(self):
         return self.last_name +' '+self.first_name
 
 
 class Entreprise(models.Model):
     nom=models.CharField(max_length=255,null=False,blank=False)
-    secteur=models.ForeignKey(Secteur,on_delete=models.CASCADE)
+    secteur=models.ForeignKey(Secteur,null=True, blank=True, on_delete=models.SET_NULL)
     description=models.TextField()
     ville=models.CharField(max_length=30)
     lien_map_ville=models.URLField()
@@ -32,10 +32,10 @@ class Entreprise(models.Model):
 class Offre_de_stage(models.Model):
     titre = models.CharField(max_length=255)
     description = models.TextField(null=True)
-    Missions=models.TextField(null=True)
-    Profil_recherché=models.TextField(null=True)
-    Ce_que_nous_offrons=models.TextField(null=True)
-    secteur=models.ForeignKey(Secteur,on_delete=models.CASCADE)
+    Missions=models.TextField(null=True,blank=True)
+    Profil_recherché=models.TextField(null=True,blank=True)
+    Ce_que_nous_offrons=models.TextField(null=True,blank=True)
+    secteur=models.ForeignKey(Secteur,null=True, blank=True, on_delete=models.SET_NULL)
     class Type(models.TextChoices):
         observation='OBS','Observation'
         assistant_ingenieur= 'ASS_ENG','Assistant Ingenieur'
@@ -59,7 +59,7 @@ class Stage(models.Model):
         final_project='PFE','Projet de fin d\'étude'
         Research='RES','Recherche'        
     type=models.CharField(max_length=10,choices=Type.choices)
-    secteur=models.ForeignKey(Secteur,on_delete=models.CASCADE)
+    secteur=models.ForeignKey(Secteur,null=True, blank=True, on_delete=models.SET_NULL)
     entreprise=models.ForeignKey(Entreprise,on_delete=models.CASCADE)
     def __str__(self):
         return self.entreprise.nom

@@ -45,41 +45,41 @@
         <div id="nav-bar">
           <ul>
               <li>
-                  <a href="#home" class="lien-nav-bar">
+                  <a href="{% url "service_home" %}" class="lien-nav-bar">
                       <img src="{% static 'images/home.svg' %}" alt="Accueil">
                       <span class="tooltip">Accueil</span>
                   </a>
               </li>
               <li class="dropdown">
-                  <a href="{% url 'home' %}" class="lien-nav-bar" onclick="toggleDropdown(event, 'secteur-dropdown')">
+                  <a href="#" class="lien-nav-bar" onclick="toggleDropdown(event, 'secteur-dropdown')">
                       <img src="{% static 'images/secteur.svg' %}" alt="Secteur">
                       <span class="tooltip">Secteurs d'Activité</span>
                   </a>
                   <div id="secteur-dropdown" class="dropdown-content">
-                      <a href="#gestion-secteurs">Voir Tous les Secteurs</a>
-                      <a href="#ajouter-secteur">Ajouter un Secteur</a>
+                      <a href="{% url "s_liste_secteur" %}">Voir Tous les Secteurs</a>
+                      <a href="{% url "ajouter_secteur" %}">Ajouter un Secteur</a>
                   </div>
               </li>
               <li class="dropdown">
-                  <a href="{% url 'entreprise' %}" class="lien-nav-bar" onclick="toggleDropdown(event, 'entreprise-dropdown')">
+                  <a href="#" class="lien-nav-bar" onclick="toggleDropdown(event, 'entreprise-dropdown')">
                       <img src="{% static 'images/company.svg' %}" alt="Entreprise">
                       <span class="tooltip">Entreprises</span>
                   </a>
                   <div id="entreprise-dropdown" class="dropdown-content">
-                      <a href="#gestion-entreprises">Voir Toutes les Entreprises</a>
-                      <a href="#ajouter-entreprise">Ajouter une Entreprise</a>
+                      <a href="{% url "s_entrprise_liste" %}">Voir Toutes les Entreprises</a>
+                      <a href="{% url "s_ajouter_entreprise" %}">Ajouter une Entreprise</a>
                   </div>
               </li>
               <li class="dropdown">
-                  <a href="{% url 'alumnis' %}" class="lien-nav-bar" onclick="toggleDropdown(event, 'etudiants-alumni-dropdown')">
+                  <a href="#" class="lien-nav-bar" onclick="toggleDropdown(event, 'etudiants-alumni-dropdown')">
                       <img src="{% static 'images/graduate.svg' %}" alt="Alumni">
                       <span class="tooltip">Étudiants et Alumni</span>
                   </a>
                   <div id="etudiants-alumni-dropdown" class="dropdown-content">
-                      <a href="#gestion-etudiants-alumni">Voir Tous les Étudiants</a>
-                      <a href="#ajouter-etudiant">Ajouter un Étudiant</a>
-                      <a href="#voir-alumni">Voir Tous les Alumni</a>
-                      <a href="#ajouter-alumni">Ajouter un Alumni</a>
+                      <a href="{% url "liste_etudiants" %}">Voir Tous les Étudiants</a>
+                      <a href="{% url "ajouter_etudiant" %}">Ajouter un Étudiant</a>
+                      <a href="{% url "liste_alumnis" %}">Voir Tous les Alumni</a>
+                      <a href="{% url "ajouter_alumnis" %}">Ajouter un Alumni</a>
                   </div>
               </li>
               <li class="dropdown">
@@ -88,8 +88,8 @@
                       <span class="tooltip">Offres de Stage</span>
                   </a>
                   <div id="offres-dropdown" class="dropdown-content">
-                      <a href="#gestion-offres">Voir Toutes les Offres</a>
-                      <a href="#ajouter-offre">Ajouter une Offre</a>
+                      <a href="{% url "s_offre_liste" %}">Voir Toutes les Offres</a>
+                      <a href="{% url "s_ajouter_offre" %}">Ajouter une Offre</a>
                   </div>
               </li>
           </ul>

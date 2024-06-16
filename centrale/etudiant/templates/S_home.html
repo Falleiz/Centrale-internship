@@ -2,7 +2,7 @@
 {% load static %}
 
 
-{% block title %}Entretien{% endblock %}
+{% block title %}Accueil{% endblock %}
 {% block link %}
 <link rel="stylesheet" href="{% static "css/s_base_style.css" %}">
 
@@ -21,24 +21,31 @@
         <div id="gestion-offres" class="section">
             <h3>Gestion des Offres de Stage</h3>
             <button class="btn-section"><a href='{% url "s_offre_liste" %}'>Voir Toutes les Offres</a></button>
-            <button class="btn-section">Ajouter une Offre</button>
+            <button class="btn-section"><a href='{% url "s_ajouter_offre" %}'>Ajouter une Offre</a></button>
         </div>
         <div id="gestion-entreprises" class="section">
             <h3>Gestion des Entreprises</h3>
-            <button class="btn-section">Voir Toutes les Entreprises</button>
-            <button class="btn-section">Ajouter une Entreprise</button>
+            <button class="btn-section"><a href='{% url "s_entrprise_liste" %}'>Voir Toutes les Entreprises</a></button>
+            <button class="btn-section"><a href='{% url "s_ajouter_entreprise" %}'> Ajouter une Entreprise </a></button>
         </div>
+        
+       
+        
         <div id="gestion-secteurs" class="section">
             <h3>Gestion des Secteurs d'Activité</h3>
-            <button class="btn-section">Voir Tous les Secteurs</button>
-            <button class="btn-section">Ajouter un Secteur</button>
+            <button class="btn-section"><a href='{% url "s_liste_secteur" %}'>Voir Tous les Secteurs</a></button>
+            <button class="btn-section"><a href="{% url 'ajouter_secteur' %}" class="btn-action">Ajouter un Secteur</a></button>
         </div>
         <div id="gestion-etudiants-alumni" class="section">
             <h3>Gestion des Étudiants et Alumni</h3>
-            <button class="btn-section">Voir Tous les Étudiants</button>
-            <button class="btn-section">Ajouter un Étudiant</button>
-            <button class="btn-section">Voir Tous les Alumni</button>
-            <button class="btn-section">Ajouter un Alumni</button>
+            <button class="btn-section"><a href="{% url 'liste_etudiants' %}" class="btn-action">Voir Tous les Étudiants</a>
+            </button>
+            <button class="btn-section"><a href="{% url 'ajouter_etudiant' %}" class="btn-action">Ajouter un Étudiant</a>
+            </button>
+            <button class="btn-section"><a href="{% url 'liste_alumnis' %}" class="btn-action">Voir Tous les Alumni</a>
+            </button>
+            <button class="btn-section"><a href="{% url 'ajouter_alumnis' %}" class="btn-action">Ajouter un Alumni</a>
+            </button>
         </div>
     </section>
 

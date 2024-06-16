@@ -37,6 +37,9 @@ form label {
 
 form input[type="text"],
 form input[type="email"],
+form input[type="url"],
+form input[type="file"],
+form input[type="password"],
 form select {
     flex: 2;
     padding: 12px;
@@ -49,7 +52,9 @@ form select {
 }
 
 form input[type="text"]::placeholder,
-form input[type="email"]::placeholder {
+form input[type="email"]::placeholder,
+form input[type="url"]::placeholder,
+form input[type="password"]::placeholder {
     color: #999999;
 }
 
