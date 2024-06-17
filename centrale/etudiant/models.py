@@ -17,7 +17,7 @@ class Users(User):
 
 class Entreprise(models.Model):
     nom=models.CharField(max_length=255,null=False,blank=False)
-    secteur=models.ForeignKey(Secteur,null=True, blank=True, on_delete=models.SET_NULL)
+    secteur=models.CharField(max_length=255,default='*')
     description=models.TextField()
     ville=models.CharField(max_length=30)
     lien_map_ville=models.URLField()
@@ -35,14 +35,14 @@ class Offre_de_stage(models.Model):
     Missions=models.TextField(null=True,blank=True)
     Profil_recherché=models.TextField(null=True,blank=True)
     Ce_que_nous_offrons=models.TextField(null=True,blank=True)
-    secteur=models.ForeignKey(Secteur,null=True, blank=True, on_delete=models.SET_NULL)
+    secteur=models.CharField(max_length=200,default='*')
     class Type(models.TextChoices):
         observation='OBS','Observation'
         assistant_ingenieur= 'ASS_ENG','Assistant Ingenieur'
         final_project='PFE','Projet de fin d\'étude'
         Research='RES','Recherche'
     type_stage=models.CharField(max_length=10,choices=Type.choices)
-    entrprise=models.ForeignKey(Entreprise,on_delete=models.CASCADE)
+    entrprise=models.CharField(max_length=200,default='*')
     ville=models.CharField(max_length=30)
     RH_email=models.EmailField()
     date_de_publication=models.DateField(auto_now_add=True)
@@ -72,10 +72,18 @@ class Alumnis(models.Model):
     linkdn=models.URLField()
     photo=models.ImageField(null=True, blank=True)
     numero=PhoneNumberField()
-    stage_1A=models.ForeignKey(Stage,on_delete=models.DO_NOTHING, related_name='stage_1A')
-    stage_2A=models.ForeignKey(Stage,on_delete=models.DO_NOTHING, related_name='stage_2A')
-    stage_3A=models.ForeignKey(Stage,on_delete=models.DO_NOTHING, related_name='stage_3A')
-    emploi=models.ForeignKey(Stage,on_delete=models.DO_NOTHING, related_name='emploi')
+    #section stage
+    stage_1A_ville=models.CharField(max_length=30,default='*')
+    stage_1A_secteur=models.CharField(max_length=30,default='*')
+    stage_1A_entreprise=models.CharField(max_length=30,default='*')
+    stage_2A_ville=models.CharField(max_length=30,default='*')
+    stage_2A_secteur=models.CharField(max_length=30,default='*')
+    stage_2A_entreprise=models.CharField(max_length=30,default='*')
+    stage_3A_ville=models.CharField(max_length=30,default='*')
+    stage_3A_secteur=models.CharField(max_length=30,default='*')
+    stage_3A_entreprise=models.CharField(max_length=30,default='*')
+    emploi_secteur=models.CharField(max_length=30,default='*')
+    emploi_entreprise=models.CharField(max_length=30,default='*')
     def __str__(self):
         return self.nom +' '+self.prenom
     

@@ -25,7 +25,7 @@
 
 <div id="alumni-list">
     {% for object in all_object %}
-    <div class="arrange" data-name="{{ object.nom }} {{ object.prenom }}" data-company="{{ object.stage_1A.entreprise.nom }} {{ object.stage_2A.entreprise.nom }} {{ object.stage_3A.entreprise.nom }}" data-sector="{{ object.stage_1A.secteur.nom }} {{ object.stage_2A.secteur.nom }} {{ object.stage_3A.secteur.nom }}">
+    <div class="arrange" data-name="{{ object.nom }} {{ object.prenom }}" data-company="{{ object.stage_1A_entreprise }} {{ object.stage_2A_entreprise }} {{ object.stage_3A_entreprise }}" data-sector="{{ object.stage_1A.secteur.nom }} {{ object.stage_2A_secteur }} {{ object.stage_3A_secteur }}">
         <a href="{% url 'alunis_infos' object.id %}">
             {% if object.photo %}
             <img src="{{ object.photo.url }}" alt="" class="round-img">

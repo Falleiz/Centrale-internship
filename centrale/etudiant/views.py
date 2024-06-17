@@ -64,22 +64,19 @@ def alumnis_page(request):
         alumni_list = alumni_list.filter(nom__icontains=search_query) | alumni_list.filter(prenom__icontains=search_query)
 
     if company_filter:
-        alumni_list = alumni_list.filter(stage_1A__entreprise__nom__icontains=company_filter) | \
-                      alumni_list.filter(stage_2A__entreprise__nom__icontains=company_filter) | \
-                      alumni_list.filter(stage_3A__entreprise__nom__icontains=company_filter)
+        alumni_list = alumni_list.filter(stage_1A_entreprise__icontains=company_filter) | \
+                      alumni_list.filter(stage_2A_entreprise__icontains=company_filter) | \
+                      alumni_list.filter(stage_2A_entreprise__icontain=company_filter)
 
     if sector_filter:
-        alumni_list = alumni_list.filter(stage_1A__secteur__nom__icontains=sector_filter) | \
-                      alumni_list.filter(stage_2A__secteur__nom__icontains=sector_filter) | \
-                      alumni_list.filter(stage_3A__secteur__nom__icontains=sector_filter)
+        alumni_list = alumni_list.filter( stage_1A_secteur__icontains=sector_filter) | \
+                      alumni_list.filter( stage_2A_secteur__nom__icontains=sector_filter) | \
+                      alumni_list.filter( stage_3A_secteur__nom__icontains=sector_filter)
 
-    companies = Stage.objects.values_list('entreprise__nom', flat=True).distinct()
-    sectors = Stage.objects.values_list('secteur__nom', flat=True).distinct()
+   
 
     return render(request, 'alunis-liste.html', {
         'all_object': alumni_list,
-        'companies': companies,
-        'sectors': sectors,
         'search_query': search_query,
         'company_filter': company_filter,
         'sector_filter': sector_filter,
@@ -145,13 +142,13 @@ def offer_page(request):
         offres = offres.filter(ville__icontains=location_filter)
 
     if sector_filter:
-        offres = offres.filter(secteur__nom__icontains=sector_filter)
+        offres = offres.filter(secteur__icontains=sector_filter)
 
     if type_filter:
         offres = offres.filter(type_stage__icontains=type_filter)
 
     if entreprise_filter:
-        offres = offres.filter(entrprise__nom__icontains=entreprise_filter)
+        offres = offres.filter(entrprise__icontains=entreprise_filter)
 
     entreprises = Entreprise.objects.all()
 
@@ -173,18 +170,14 @@ def entreprise_page(request):
         all_entreprise = all_entreprise.filter(nom__icontains=search_query)
 
     if sector_filter:
-        all_entreprise = all_entreprise.filter(secteur__nom__icontains=sector_filter)
+        all_entreprise = all_entreprise.filter(secteur__icontains=sector_filter)
 
     if location_filter:
         all_entreprise = all_entreprise.filter(ville__icontains=location_filter)
 
-    sectors = Secteur.objects.all()
-    locations = Entreprise.objects.values_list('ville', flat=True).distinct()
 
     return render(request, 'entreprise.html', {
         'all_entreprise': all_entreprise,
-        'sectors': sectors,
-        'locations': locations,
         'search_query': search_query,
         'sector_filter': sector_filter,
         'location_filter': location_filter,
@@ -247,7 +240,7 @@ def s_login(request):
             username = request.POST.get('name',None)
             password=request.POST.get('password',None)
             if username !=None and password !=None:
-                print(f'email_recuperer: {username}\n password: {password}')
+                
                 try:
                     user=Service_users.objects.get(username=username,password=password)
                     if user:
@@ -279,9 +272,9 @@ def s_offre_list(request):
     if filtre_titre:
         offres = offres.filter(titre__icontains=filtre_titre)
     if filtre_entreprise:
-        offres = offres.filter(entrprise__nom__icontains=filtre_entreprise)
+        offres = offres.filter(entrprise__icontains=filtre_entreprise)
     if filtre_secteur:
-        offres = offres.filter(secteur__nom__icontains=filtre_secteur)
+        offres = offres.filter(secteur__icontains=filtre_secteur)
     if filtre_duree:
         offres = offres.filter(durée__iexact=filtre_duree)
     if filtre_type_stage:
@@ -289,8 +282,8 @@ def s_offre_list(request):
     if query:
         offres = offres.filter(
             Q(titre__icontains=query) |
-            Q(entrprise__nom__icontains=query) |
-            Q(secteur__nom__icontains=query) |
+            Q(entrprise__icontains=query) |
+            Q(secteur__icontains=query) |
             Q(durée__iexact=query) |
             Q(type_stage__iexact=query)
         )
@@ -341,7 +334,7 @@ def s_enterprise_liste(request):
     if search_ville:
         entreprises = entreprises.filter(ville__icontains=search_ville)
     if search_secteur:
-        entreprises = entreprises.filter(secteur__nom__icontains=search_secteur)
+        entreprises = entreprises.filter(secteur__icontains=search_secteur)
 
     secteurs = Secteur.objects.all()
     
@@ -467,11 +460,11 @@ def liste_alumnis(request):
     if query:
         alumnis = alumnis.filter(nom__icontains=query) | alumnis.filter(prenom__icontains=query)
     if secteur:
-        alumnis = alumnis.filter(stage_1A__secteur__icontains=secteur) | alumnis.filter(stage_2A__secteur__icontains=secteur) | alumnis.filter(stage_3A__secteur__icontains=secteur) | alumnis.filter(emploi__secteur__icontains=secteur)
+        alumnis = alumnis.filter(stage_1A_secteur__icontains=secteur) | alumnis.filter(stage_2A_secteur__icontains=secteur) | alumnis.filter(stage_3A_secteur__icontains=secteur) | alumnis.filter(emploi_secteur__icontains=secteur)
     if entreprise:
-        alumnis = alumnis.filter(stage_1A__entreprise__icontains=entreprise) | alumnis.filter(stage_2A__entreprise__icontains=entreprise) | alumnis.filter(stage_3A__entreprise__icontains=entreprise) | alumnis.filter(emploi__entreprise__icontains=entreprise)
+        alumnis = alumnis.filter(stage_1A_entreprise__icontains=entreprise) | alumnis.filter(stage_2A_entreprise__icontains=entreprise) | alumnis.filter(stage_3A_entreprise__icontains=entreprise) | alumnis.filter(emploi_entreprise__icontains=entreprise)
     if ville:
-        alumnis = alumnis.filter(stage_1A__ville__icontains=ville) | alumnis.filter(stage_2A__ville__icontains=ville) | alumnis.filter(stage_3A__ville__icontains=ville) | alumnis.filter(emploi__ville__icontains=ville)
+        alumnis = alumnis.filter(stage_1A_ville__icontains=ville) | alumnis.filter(stage_2A_ville_icontains=ville) | alumnis.filter(stage_3A_ville__icontains=ville) | alumnis.filter(emploi_ville__icontains=ville)
 
     return render(request, 'liste_alumnis.html', {'alumnis': alumnis})
 

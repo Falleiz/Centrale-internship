@@ -20,9 +20,9 @@ class OffreDeStageForm(forms.ModelForm):
             'Missions': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Missions'}),
             'Profil_recherché': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Profil recherché'}),
             'Ce_que_nous_offrons': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Ce que nous offrons'}),
-            'secteur': forms.Select(attrs={'class': 'form-control'}),
+            'secteur':forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Secteur'}),
             'type_stage': forms.Select(attrs={'class': 'form-control'}),
-            'entrprise': forms.Select(attrs={'class': 'form-control'}),
+            'entrprise': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Entrprise'}),
             'ville': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ville'}),
             'RH_email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Email RH'}),
             'logo_url': forms.URLInput(attrs={'class': 'form-control', 'placeholder': 'URL du logo'}),
@@ -36,7 +36,7 @@ class EntrepriseForm(forms.ModelForm):
         fields = ['nom', 'secteur', 'description', 'ville', 'lien_map_ville', 'logo_url', 'lien_page_web']
         widgets = {
             'nom': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nom de l\'entreprise'}),
-            'secteur': forms.Select(attrs={'class': 'form-control'}),
+            'secteur': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Secteur'}),
             'description': forms.Textarea(attrs={'class': 'form-control', 'rows': 3, 'placeholder': 'Description de l\'entreprise'}),
             'ville': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ville'}),
             'lien_map_ville': forms.URLInput(attrs={'class': 'form-control', 'placeholder': 'Lien Google Maps'}),
@@ -73,7 +73,7 @@ class UserForm(forms.ModelForm):
 class AlumnisForm(forms.ModelForm):
     class Meta:
         model = Alumnis
-        fields = ['nom', 'prenom', 'promotion', 'email', 'linkdn', 'photo', 'numero', 'stage_1A', 'stage_2A', 'stage_3A', 'emploi']
+        fields = ['nom', 'prenom', 'promotion', 'email', 'linkdn', 'photo', 'numero', 'stage_1A_ville', 'stage_1A_secteur', 'stage_1A_entreprise','stage_2A_ville', 'stage_2A_secteur', 'stage_2A_entreprise','stage_3A_ville', 'stage_3A_secteur', 'stage_3A_entreprise', 'emploi_secteur','emploi_entreprise']
         widgets = {
             'nom': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nom'}),
             'prenom': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Prénom'}),
@@ -82,9 +82,19 @@ class AlumnisForm(forms.ModelForm):
             'linkdn': forms.URLInput(attrs={'class': 'form-control', 'placeholder': 'LinkedIn'}),
             'photo': forms.ClearableFileInput(attrs={'class': 'form-control'}),
             'numero': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Numéro de téléphone'}),
-            'stage_1A': forms.Select(attrs={'class': 'form-control'}),
-            'stage_2A': forms.Select(attrs={'class': 'form-control'}),
-            'stage_3A': forms.Select(attrs={'class': 'form-control'}),
+            'stage_1A_entreprise': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'stage_1A_Entreprise'}),
+            'stage_1A_secteur': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'stage_1A_Secteur'}),
+            'stage_1A_ville':  forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'stage_1A_Ville'}),
+            'stage_2A_entreprise': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'stage_2A_Entreprise'}),
+            'stage_2A_secteur': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'stage_2A_Secteur'}),
+            'stage_2A_ville':  forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'stage_2A_Ville'}),
+            'stage_3A_entreprise': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'stage_3A_Entreprise'}),
+            'stage_3A_secteur': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'stage_3A_Secteur'}),
+            'stage_3A_ville':  forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'stage_3A_Ville'}),
+            'emploi_entreprise': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'emploi_Entreprise'}),
+            'emploi_secteur': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'emploi_Secteur'}),
+
+
             'emploi': forms.Select(attrs={'class': 'form-control'}),
         }
         

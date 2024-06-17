@@ -25,7 +25,7 @@ class StageAdmin(admin.ModelAdmin):
 
 @admin.register(Alumnis)
 class AlumnisAdmin(admin.ModelAdmin):
-    list_display=['id','nom','prenom','email','numero','stage_1A','stage_2A','stage_3A','emploi','photo']
+    list_display=['nom', 'prenom', 'promotion', 'email', 'linkdn', 'photo', 'numero', 'stage_1A_ville', 'stage_1A_secteur', 'stage_1A_entreprise','stage_2A_ville', 'stage_2A_secteur', 'stage_2A_entreprise','stage_3A_ville', 'stage_3A_secteur', 'stage_3A_entreprise', 'emploi_secteur','emploi_entreprise']
 
 @admin.register(Candidature)
 class CandidatureAdmin(admin.ModelAdmin):
