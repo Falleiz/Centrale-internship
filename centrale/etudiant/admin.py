@@ -39,5 +39,35 @@ from .models import Service_users
 class Service_usersAdmin(admin.ModelAdmin):
         list_display = ['first_name','last_name','email','password','username']
 
+ #--------------------------------------------------------------------------------------------------------------
+ #PARTIE SERVICE RH 
+from .models import Rh_service,Rh_favories,Portfolio
+@admin.register(Rh_service)
+class Rh_serviceAdmin(admin.ModelAdmin):
+    list_display = ['first_name','last_name','email','password','username','entreprise','secteur']
     
+@admin.register(Rh_favories)
+class Rh_favorieAdmin(admin.ModelAdmin):
+    list_display = ['RH','candidature']
+
+@admin.register(Portfolio)
+class PortfolioAdmin(admin.ModelAdmin):
+    list_display = [
+        'user', 
+        'photo', 
+        'specialite', 
+        'introduction', 
+        'formation', 
+        'experiences_professionnelles', 
+        'competences_techniques', 
+        'soft_skills', 
+        'projets_realises', 
+        'certifications', 
+        'publications', 
+        'activites_extrascolaires', 
+        'references'
+    ]
+
+ 
+   
    

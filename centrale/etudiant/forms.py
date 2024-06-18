@@ -1,5 +1,5 @@
 from django import forms
-from .models import Candidature,Offre_de_stage,Entreprise,Secteur,Users,Alumnis,Stage
+from .models import Candidature,Offre_de_stage,Entreprise,Secteur,Users,Alumnis,Stage,Portfolio
 
 class CandidatureForm(forms.ModelForm):
     class Meta:
@@ -106,4 +106,28 @@ class StageForm(forms.ModelForm):
             'type': forms.Select(attrs={'class': 'form-control'}),
             'secteur': forms.Select(attrs={'class': 'form-control'}),
             'entreprise': forms.Select(attrs={'class': 'form-control'}),
+        }
+        
+
+
+from django import forms
+from .models import Portfolio
+
+class PortfolioForm(forms.ModelForm):
+    class Meta:
+        model = Portfolio
+        exclude = ['user']
+        widgets = {
+            'photo': forms.ClearableFileInput(attrs={'class': 'form-control'}),
+            'specialite': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Spécialité'}),
+            'introduction': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Brève présentation personnelle, objectifs professionnels, résumé des compétences principales.'}),
+            'formation': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Informations sur la formation académique, diplômes obtenus, projets académiques significatifs.'}),
+            'experiences_professionnelles': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Stagiaires, alternances, emplois avec détails des responsabilités et réalisations'}),
+            'competences_techniques': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'competences_techniques'}),
+            'soft_skills': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Soft skills'}),
+            'projets_realises': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Description détaillée des projets significatifs.'}),
+            'certifications': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Certifications techniques et formations suivies.'}),
+            'publications': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Articles publiés et participation à des conférences.'}),
+            'activites_extrascolaires': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Activités extrascolaires'}),
+            'references': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Références'}),
         }

@@ -10,9 +10,13 @@ class Secteur(models.Model):
         return self.nom
        
 class Users(User):
-    secteur=models.ForeignKey(Secteur,null=True, blank=True, on_delete=models.SET_NULL)
+    secteur = models.ForeignKey(Secteur, null=True, blank=True, on_delete=models.SET_NULL)
+    annee_etude = models.CharField(max_length=50, null=True, blank=True)  
+    photo = models.ImageField(upload_to='photos/', null=True, blank=True) 
+    
+
     def __str__(self):
-        return self.last_name +' '+self.first_name
+        return self.last_name + ' ' + self.first_name
 
 
 class Entreprise(models.Model):
@@ -107,3 +111,38 @@ from django.db.models import Q
 class Service_users(User):
      def __str__(self):
         return self.last_name +' '+self.first_name
+
+#--------------------------------------------------------------------------------------------------------------------
+#PARtIE  Service RH
+
+class Rh_service(User):
+    entreprise=models.CharField(max_length=50,blank=False)
+    secteur=models.CharField(max_length=50,blank=False)
+    def __str__(self):
+        return self.last_name +'' +self.first_name
+    
+class Rh_favories(models.Model):
+    RH=models.ForeignKey('Rh_service', on_delete=models.CASCADE)
+    candidature=models.ForeignKey('Candidature',on_delete=models.CASCADE)
+    def __str__(self):
+        return self.candidature.etudiant.nom
+    
+
+
+class Portfolio(models.Model):
+    user=models.ForeignKey(User,on_delete=models.CASCADE)
+    photo = models.ImageField(upload_to='photos/')
+    specialite = models.CharField(max_length=100)
+    introduction = models.TextField(blank=True)
+    formation = models.TextField(blank=True)
+    experiences_professionnelles = models.TextField(blank=True)
+    competences_techniques = models.TextField(blank=True)
+    soft_skills = models.TextField(blank=True)
+    projets_realises = models.TextField(blank=True)
+    certifications = models.TextField(blank=True)
+    publications = models.TextField(blank=True)
+    activites_extrascolaires = models.TextField(blank=True)
+    references = models.TextField(blank=True)
+
+    def __str__(self):
+        return self.user.first_name +''+self.user.last_name

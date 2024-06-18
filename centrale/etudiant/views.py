@@ -254,10 +254,13 @@ def s_login(request):
 
         return render(request,'s_login.html')
     
+@login_required
 
 def service_home(request):
     user=request.user
     return render(request, 'S_home.html',{'user':user})
+
+@login_required
 
 def s_offre_list(request):
     query = request.GET.get('q', '')
@@ -291,6 +294,7 @@ def s_offre_list(request):
     return render(request, 's_offre_liste.html', {'offres': offres})
 
 
+@login_required
 
 def s_offre_modifier(request, id):
     offre = get_object_or_404(Offre_de_stage, id=id)
@@ -303,6 +307,7 @@ def s_offre_modifier(request, id):
         form = OffreDeStageForm(instance=offre)
     return render(request, 's_modifier_offre.html', {'form': form, 'offre': offre})
 
+@login_required
 
 def s_offre_supprimer(request, id):
     offre = get_object_or_404(Offre_de_stage, id=id)
@@ -310,6 +315,7 @@ def s_offre_supprimer(request, id):
         offre.delete()
         return redirect('s_offre_liste')
     return render(request, 'supprimer_offre.html', {'offre': offre})
+@login_required
 
 def s_ajouter_offre(request):
     if request.method == 'POST':
@@ -321,6 +327,7 @@ def s_ajouter_offre(request):
         form = OffreDeStageForm()
     return render(request, 's_ajouter_offre.html', {'form': form})
 
+@login_required
 
 def s_enterprise_liste(request):
     entreprises = Entreprise.objects.all()
@@ -340,6 +347,7 @@ def s_enterprise_liste(request):
     
     return render(request, 's_entreprises_liste.html', {'entreprises': entreprises, 'secteurs': secteurs})
 
+@login_required
 
 def entreprise_modifier(request, pk):
     entreprise = get_object_or_404(Entreprise, pk=pk)
@@ -351,6 +359,7 @@ def entreprise_modifier(request, pk):
     else:
         form = EntrepriseForm(instance=entreprise)
     return render(request, 'entreprise_modifier.html', {'form': form})
+@login_required
 
 def entreprise_supprimer(request, pk):
     entreprise = get_object_or_404(Entreprise, pk=pk)
@@ -358,6 +367,7 @@ def entreprise_supprimer(request, pk):
         entreprise.delete()
         return redirect('s_entrprise_liste')
     return render(request, 'entreprise_supprimer.html', {'entreprise': entreprise})
+@login_required
 
 def s_ajouter_entreprise(request):
     if request.method == 'POST':
@@ -369,6 +379,7 @@ def s_ajouter_entreprise(request):
         form = EntrepriseForm()
     return render(request, 's_ajouter_entreprise.html', {'form': form})
 
+@login_required
 
 def s_liste_secteur(request):
     query = request.GET.get('search')
@@ -378,6 +389,7 @@ def s_liste_secteur(request):
         secteurs = Secteur.objects.all()
     return render(request, 's_liste_secteur.html', {'secteurs': secteurs})
 
+@login_required
 
 def ajouter_secteur(request):
     if request.method == 'POST':
@@ -388,6 +400,7 @@ def ajouter_secteur(request):
     else:
         form = SecteurForm()
     return render(request, 'ajouter_secteur.html', {'form': form})
+@login_required
 
 def supprimer_secteur(request, pk):
     secteur = get_object_or_404(Secteur, pk=pk)
@@ -395,6 +408,7 @@ def supprimer_secteur(request, pk):
         secteur.delete()
         return redirect('s_liste_secteur')
     return render(request, 'supprimer_secteur.html', {'secteur': secteur})
+@login_required
 
 def modifier_secteur(request, pk):
     secteur = get_object_or_404(Secteur, pk=pk)
@@ -409,6 +423,7 @@ def modifier_secteur(request, pk):
 
 
 
+@login_required
 
 
 def liste_etudiants(request):
@@ -419,6 +434,7 @@ def liste_etudiants(request):
         etudiants = Users.objects.all()
     return render(request, 'liste_etudiants.html', {'etudiants': etudiants})
 
+@login_required
 
 def ajouter_etudiant(request):
     if request.method == 'POST':
@@ -429,6 +445,7 @@ def ajouter_etudiant(request):
     else:
         form = UserForm()
     return render(request, 'ajouter_etudiant.html', {'form': form})
+@login_required
 
 def modifier_etudiant(request, pk):
     etudiant = get_object_or_404(Users, pk=pk)
@@ -440,6 +457,7 @@ def modifier_etudiant(request, pk):
     else:
         form = UserForm(instance=etudiant)
     return render(request, 'modifier_etudiant.html', {'form': form, 'etudiant': etudiant})
+@login_required
 
 def supprimer_etudiant(request, pk):
     etudiant = get_object_or_404(Users, pk=pk)
@@ -449,6 +467,7 @@ def supprimer_etudiant(request, pk):
     return render(request, 'supprimer_etudiant.html', {'etudiant': etudiant})
 
 
+@login_required
 
 def liste_alumnis(request):
     query = request.GET.get('search')
@@ -467,6 +486,7 @@ def liste_alumnis(request):
         alumnis = alumnis.filter(stage_1A_ville__icontains=ville) | alumnis.filter(stage_2A_ville_icontains=ville) | alumnis.filter(stage_3A_ville__icontains=ville) | alumnis.filter(emploi_ville__icontains=ville)
 
     return render(request, 'liste_alumnis.html', {'alumnis': alumnis})
+@login_required
 
 def ajouter_alumnis(request):
     if request.method == 'POST':
@@ -477,6 +497,7 @@ def ajouter_alumnis(request):
     else:
         form = AlumnisForm()
     return render(request, 'ajouter_alumnis.html', {'form': form})
+@login_required
 
 def modifier_alumnis(request, pk):
     alumnis = get_object_or_404(Alumnis, pk=pk)
@@ -488,6 +509,7 @@ def modifier_alumnis(request, pk):
     else:
         form = AlumnisForm(instance=alumnis)
     return render(request, 'modifier_alumnis.html', {'form': form, 'alumnis': alumnis})
+@login_required
 
 def supprimer_alumnis(request, pk):
     alumnis = get_object_or_404(Alumnis, pk=pk)
@@ -495,3 +517,149 @@ def supprimer_alumnis(request, pk):
         alumnis.delete()
         return redirect('liste_alumnis')
     return render(request, 'supprimer_alumnis.html', {'alumnis': alumnis})
+
+
+#----------------------------------------------------------------------------------------------------------------
+#Partie servie RH
+from .models import Rh_service,Rh_favories,Portfolio
+
+def rh_login(request):
+    if request.method == 'POST':
+        email = request.POST.get('email',None)
+        password=request.POST.get('password',None)
+        if email !=None and password !=None:
+            print(f'email_recuperer: {email}\n password: {password}')
+            try:
+                user=Rh_service.objects.get(email=email,password=password)
+                if user:
+                    print(f'usrname:{user.get_username()}')
+                    login(request,user)
+                    return redirect('rh_home')
+
+            except :
+                return render(request, 'r_login_page.html', {'error': 'Invalid username or password'})
+
+    return render(request, 'r_login_page.html')
+            
+@login_required
+
+def rh_home(request):
+    user=request.user
+    return render(request,'rh_home.html',{'user':user})
+
+@login_required
+
+def rh_offre_list(request):
+    user=request.user
+    offres=Offre_de_stage.objects.filter(RH_email=user.email)
+    return render(request,'R_gestion_offre.html',{'offres':offres})
+
+                     
+@login_required
+def r_offre_modifier(request, id):
+    offre = get_object_or_404(Offre_de_stage, id=id)
+    if request.method == 'POST':
+        form = OffreDeStageForm(request.POST, instance=offre)
+        if form.is_valid():
+            form.save()
+            return redirect('offre')
+    else:
+        form = OffreDeStageForm(instance=offre)
+    return render(request, 'R_modifier_offre.html', {'form': form, 'offre': offre})
+
+@login_required
+def r_offre_supprimer(request, id):
+    offre = get_object_or_404(Offre_de_stage, id=id)
+    if request.method == 'POST':
+        offre.delete()
+        return redirect('offre')
+    return render(request, 'R_supprimer_offre2.html', {'offre': offre})
+
+
+@login_required
+
+def r_ajouter_offre(request):
+    user=request.user
+    if request.method == 'POST':
+        form = OffreDeStageForm(request.POST)
+        if form.is_valid():
+            offre = form.save(commit=False)
+            offre.RH_email = user.email  # Pré-remplir le champ RH_email
+            offre.save()
+            return redirect('offre')  
+    else:
+        form = OffreDeStageForm()
+    return render(request, 'R_ajouter_offre.html', {'form': form})
+
+
+
+@login_required
+def candidatures_pour_offre(request, offre_id):
+    offre = get_object_or_404(Offre_de_stage, id=offre_id)
+    candidatures = Candidature.objects.filter(Offre=offre)
+    return render(request, 'R_candidature.html', {'offre': offre, 'candidatures': candidatures})
+
+
+
+
+@login_required
+def ajouter_favori(request, candidature_id):
+    user = request.user
+    user=get_object_or_404(Rh_service,id=user.id)
+    candidature = get_object_or_404(Candidature, id=candidature_id)
+    favori= Rh_favories(RH=user,candidature=candidature)
+    favori.save()
+    return redirect('candidatures_pour_offre', offre_id=candidature.Offre.id)
+
+# Retirer une candidature des favoris
+@login_required
+def retirer_favori(request, candidature_id):
+    user = request.user
+    candidature = get_object_or_404(Candidature, id=candidature_id)
+    favori=Rh_favories.objects.filter(RH=user, candidature=candidature)
+    favori.delete()
+    return redirect('favoris')
+
+# Liste des candidatures favorites
+@login_required
+def liste_favoris(request):
+    user = request.user
+    id=user.id
+    user=get_object_or_404(Rh_service,id=id)
+    favoris = Rh_favories.objects.filter(RH=user)
+    return render(request, 'R_favoris.html', {'favoris': favoris})
+
+@login_required
+def all_candidature(request):
+    user = request.user
+    offres = Offre_de_stage.objects.filter(RH_email=user.email)
+    offre_candidatures = []
+    for offre in offres:
+        candidatures = Candidature.objects.filter(Offre=offre)
+        offre_candidatures.append((offre, candidatures))
+    return render(request, 'all_candidature.html', {'offre_candidatures': offre_candidatures})
+
+
+
+def liste_etudiants(request):
+    search_query = request.GET.get('search', '')
+    annee_etude = request.GET.get('annee_etude', '')
+
+    etudiants = Users.objects.all()
+
+    if search_query:
+        etudiants = etudiants.filter(
+            Q(first_name__icontains=search_query) | Q(last_name__icontains=search_query)
+        )
+
+    if annee_etude:
+        etudiants = etudiants.filter(annee_etude__icontains=annee_etude)
+
+    return render(request, 'R_liste_etudiant.html', {'etudiants': etudiants})
+
+
+
+def portfolio(request,etudiant_id):
+    etudiant = get_object_or_404(Users, pk=etudiant_id)
+    portfolio = Portfolio.objects.filter(user=etudiant)
+    return render(request,'portfolio.html',{'portfolio':portfolio})
