@@ -13,7 +13,7 @@
     <p class="purpose">Accéder aux profils d'élèves talentueux</p>
 
     <div class="search-container">
-        <form method="GET" action="{% url 'liste_etudiants' %}">
+        <form method="GET" action="{% url 'r_liste_etudiants' %}">
             <input type="text" name="search" placeholder="Rechercher par nom ou prénom" value="{{ request.GET.search }}">
             <input type="text" name="annee_etude" placeholder="Rechercher par année d'étude" value="{{ request.GET.annee_etude }}">
             <button type="submit">Rechercher</button>

@@ -9,9 +9,10 @@
 {% endblock %}
 
 {% block content %}
-<div>
-  <a href=""> <img src="{{object.logo_url}}"  class="image" alt=""></a>
- </div>
+<div class='infos2'>
+
+  <img src="{{object.logo_url}}"  class="image" alt="">
+ 
  <div class='infos'> 
     <div class="text1">
       <h3> <i>{{object.titre}}</i></h3>
@@ -25,9 +26,6 @@
     <div class="text4">
       <h3> <i>{{object.RH_email}}</i></h3>
     </div>
-    <div class="text5">
-      <h2> <i><a href="{% url 'candidature' object.id %}"> Candidature</a></i></h2>
-    </div>
     <div class="text6">
       <h4>
         <i>More information</i>
@@ -36,6 +34,11 @@
         {{object.description}}
       </p>
   </div>
+  </div>
+  <div class="text5">
+    <h2> <i><a href="{% url 'candidature' object.id %}"> Candidature</a></i></h2>
+  </div>
+
  
 
 

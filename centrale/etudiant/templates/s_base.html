@@ -25,7 +25,7 @@
                 </span>
             </a>
             <!--Clik sur déconnecter-->
-            <a href="{% url 'login' %}" id="deconnexion">
+            <a href="{% url 'acceuil' %}" id="deconnexion">
               <link rel="stylesheet"href="animation\animation_log_out\style.css">
               <button class="Btn">
                 <div class="sign">
@@ -76,9 +76,9 @@
                       <span class="tooltip">Étudiants et Alumni</span>
                   </a>
                   <div id="etudiants-alumni-dropdown" class="dropdown-content">
-                      <a href="{% url "liste_etudiants" %}">Voir Tous les Étudiants</a>
+                      <a href="{% url "s_liste_etudiants" %}">Voir Tous les Étudiants</a>
                       <a href="{% url "ajouter_etudiant" %}">Ajouter un Étudiant</a>
-                      <a href="{% url "liste_alumnis" %}">Voir Tous les Alumni</a>
+                      <a href="{% url "s_liste_alumnis" %}">Voir Tous les Alumni</a>
                       <a href="{% url "ajouter_alumnis" %}">Ajouter un Alumni</a>
                   </div>
               </li>

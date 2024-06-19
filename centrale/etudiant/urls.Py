@@ -19,6 +19,11 @@ urlpatterns =[
    path('infos/<int:object_id>/',views.offer_description,name='infos'),
    path('infos_alunis/<int:object_id>/',views.alunis_infos_page,name='alunis_infos'),
    path('postuler/<int:object_id>',views.candidature_page,name='candidature'),
+   path('personnaliser_profil/', views.personnaliser_profil, name='personnaliser_profil'),
+   path('portfolio/<int:etudiant_id>/', views.portfolio, name='portfolio'),
+   path('update_portfolio/<int:etudiant_id>/', views.update_portfolio, name='update_portfolio'),
+    path('etudiant_portfolio/<int:etudiant_id>/', views.etudiant_portfolio, name='etudiant_portfolio'),
+
    
    #---------------------------------------------------------------------------------------------------------------#
    #PARTIE SERVICE DE SCOLARITE
@@ -36,12 +41,12 @@ urlpatterns =[
    path('s_list_secteur/',views.s_liste_secteur,name='s_liste_secteur'),
    path('secteurs/ajouter/', views.ajouter_secteur, name='ajouter_secteur'),
    path('secteurs/supprimer/<int:pk>/', views.supprimer_secteur, name='supprimer_secteur'), 
-   path('etudiants/',views.liste_etudiants, name='liste_etudiants'),
+   path('s_etudiants/',views.s_liste_etudiants, name='s_liste_etudiants'),
    path('secteurs/modifier/<int:pk>/', views.modifier_secteur, name='modifier_secteur'),
    path('etudiants/ajouter/', views.ajouter_etudiant, name='ajouter_etudiant'),
    path('etudiants/modifier/<int:pk>/', views.modifier_etudiant, name='modifier_etudiant'),
    path('etudiants/supprimer/<int:pk>/', views.supprimer_etudiant, name='supprimer_etudiant'),
-   path('alumnis/', views.liste_alumnis, name='liste_alumnis'),
+   path('alumnis/', views.liste_alumnis, name='s_liste_alumnis'),
    path('alumnis/ajouter/', views.ajouter_alumnis, name='ajouter_alumnis'),
     path('alumnis/modifier/<int:pk>/',views.modifier_alumnis, name='modifier_alumnis'),
     path('alumnis/supprimer/<int:pk>/', views.supprimer_alumnis, name='supprimer_alumnis'),
@@ -58,7 +63,7 @@ path('ajouter_favori/<int:candidature_id>/', views.ajouter_favori, name='ajouter
 path('retirer_favori/<int:candidature_id>/', views.retirer_favori, name='retirer_favori'),
 path('favoris/', views.liste_favoris, name='favoris'),
 path('candidature/',views.all_candidature,name='all_candidature'),
-path('liste_etudiants/', views.liste_etudiants, name='liste_etudiants'),
+path('liste_etudiants/', views.liste_etudiants, name='r_liste_etudiants'),
 path('portfolio<int:etudiant_id>/',views.portfolio,name='portfolio'),
 
     

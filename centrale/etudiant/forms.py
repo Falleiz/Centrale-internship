@@ -58,14 +58,14 @@ class SecteurForm(forms.ModelForm):
 class UserForm(forms.ModelForm):
     class Meta:
         model = Users
-        fields = ['username', 'first_name', 'last_name', 'email', 'secteur','password']
+        fields = ['username', 'first_name', 'last_name', 'email', 'password','annee_etude']
         widgets = {
             'username': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nom d\'utilisateur'}),
             'first_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Prénom'}),
             'last_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nom'}),
             'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Adresse e-mail'}),
-            'secteur': forms.Select(attrs={'class': 'form-control'}),
             'password':forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'password'}),
+            'annee_etude':forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'année d\'etude'}),
             
         }
 

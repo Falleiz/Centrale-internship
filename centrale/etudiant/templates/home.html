@@ -26,7 +26,7 @@
                 </span>
             </a>
             <!--Clik sur déconnecter-->
-            <a href="{% url 'login' %}" id="deconnexion">
+            <a href="{% url 'acceuil' %}" id="deconnexion">
               <link rel="stylesheet"href="animation\animation_log_out\style.css">
               <button class="Btn">
                 <div class="sign">
@@ -81,6 +81,13 @@
               <span class="tooltip">Entretien</span>
             </a>
           </li>
+          <li id="personnaliser_profil">
+            <a href="{% url "personnaliser_profil" %}" class="lien-nav-bar">
+                <img src="{% static 'images/cv.svg' %}">
+                <span class="tooltip">Personnaliser Profil</span>
+            </a>
+        </li>
+
           <li><a href="{% url 'aide' %}"class="lien-nav-bar">
               <img src="{% static 'images/help.svg' %}">
               <span class="tooltip">Aide</span>

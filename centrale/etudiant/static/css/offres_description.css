@@ -1,6 +1,7 @@
-#offre {
-    background-color: #00A986;
-    height: 40px;
+img {
+    position: relative;
+    width: 30%;
+    height: 20%;
 }
 
 .text1 {

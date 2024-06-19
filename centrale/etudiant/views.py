@@ -7,7 +7,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required  # For protecting views
 from .models import Users,Alumnis,Offre_de_stage,Entreprise,Secteur,Candidature
-from .forms import CandidatureForm
+from .forms import CandidatureForm,PortfolioForm
 
 
 def acceuil(request):
@@ -35,6 +35,7 @@ def do_login_user(request):
                      
            
     return render(request, 'login_page.html')
+
 
 def home(request):
     user=request.user
@@ -225,6 +226,48 @@ def candidature_page(request, object_id):
         form = CandidatureForm()
     
     return render(request, 'candidature.html', {'form': form, 'offre': offre})
+
+
+
+
+@login_required
+def personnaliser_profil(request):
+    user=request.user
+    user=get_object_or_404(Users,id=user.id)
+    return render(request, 'personnaliser_profil.html',{'user':user})
+
+@login_required
+def update_portfolio(request, etudiant_id):
+    user = get_object_or_404(Users, id=etudiant_id)
+
+    # Essayer de récupérer le portfolio existant, sinon créer un nouveau
+    portfolio, created = Portfolio.objects.get_or_create(user=user)
+
+    if request.method == 'POST':
+        form = PortfolioForm(request.POST, request.FILES, instance=portfolio)
+        if form.is_valid():
+            form.save()
+            return redirect('personnaliser_profil')  
+    else:
+        form = PortfolioForm(instance=portfolio)
+    
+    return render(request, 'update_portfolio.html', {'form': form})
+
+
+def etudiant_portfolio(request,etudiant_id):
+    etudiant = get_object_or_404(Users, pk=etudiant_id)
+    try:
+        portfolio = get_object_or_404(Portfolio, user=etudiant)
+        return render(request, 'portfolio.html', {'portfolio': portfolio})
+    except :
+        portfolio=Portfolio(user=etudiant)
+        portfolio.save()
+        portfolio = Portfolio.objects.filter(user=etudiant).last()
+    return render(request,'etudiant_portfolio.html',{'portfolio':portfolio})
+
+
+
+
 
 
 
@@ -426,7 +469,7 @@ def modifier_secteur(request, pk):
 @login_required
 
 
-def liste_etudiants(request):
+def s_liste_etudiants(request):
     query = request.GET.get('search')
     if query:
         etudiants = Users.objects.filter(last_name__icontains=query) | Users.objects.filter(first_name__icontains=query)
@@ -657,9 +700,14 @@ def liste_etudiants(request):
 
     return render(request, 'R_liste_etudiant.html', {'etudiants': etudiants})
 
-
-
-def portfolio(request,etudiant_id):
+@login_required
+def portfolio(request, etudiant_id):
     etudiant = get_object_or_404(Users, pk=etudiant_id)
-    portfolio = Portfolio.objects.filter(user=etudiant)
-    return render(request,'portfolio.html',{'portfolio':portfolio})
+    try:
+        portfolio = get_object_or_404(Portfolio, user=etudiant)
+        return render(request, 'portfolio.html', {'portfolio': portfolio})
+    except :
+        portfolio=Portfolio(user=etudiant)
+        portfolio.save()
+        portfolio = Portfolio.objects.filter(user=etudiant).last()
+        return render(request, 'portfolio.html', {'portfolio': portfolio})

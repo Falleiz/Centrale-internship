@@ -24,7 +24,7 @@
                 </span>
             </a>
             <!--Clik sur déconnecter-->
-            <a href="{% url 'login' %}" id="deconnexion">
+            <a href="{% url 'acceuil' %}" id="deconnexion">
               <link rel="stylesheet"href="animation\animation_log_out\style.css">
               <button class="Btn">
                 <div class="sign">
@@ -73,7 +73,7 @@
                 <li>
 
                   <li id="entreprise">
-                    <a href="{% url "liste_etudiants" %}"class="lien-nav-bar">
+                    <a href="{% url "r_liste_etudiants" %}"class="lien-nav-bar">
                         <img src="{% static 'images/homme.png' %}" width="20px" height="20px" alt="Candidatures Icon">
                         <span class="tooltip">Profil Etudiant</span>
                     </a>
