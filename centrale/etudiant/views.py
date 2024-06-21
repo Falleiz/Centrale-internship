@@ -526,7 +526,7 @@ def liste_alumnis(request):
     if entreprise:
         alumnis = alumnis.filter(stage_1A_entreprise__icontains=entreprise) | alumnis.filter(stage_2A_entreprise__icontains=entreprise) | alumnis.filter(stage_3A_entreprise__icontains=entreprise) | alumnis.filter(emploi_entreprise__icontains=entreprise)
     if ville:
-        alumnis = alumnis.filter(stage_1A_ville__icontains=ville) | alumnis.filter(stage_2A_ville_icontains=ville) | alumnis.filter(stage_3A_ville__icontains=ville) | alumnis.filter(emploi_ville__icontains=ville)
+        alumnis = alumnis.filter(stage_1A_ville__icontains=ville) | alumnis.filter(stage_2A_ville__icontains=ville) | alumnis.filter(stage_3A_ville__icontains=ville) | alumnis.filter(emploi_ville__icontains=ville)
 
     return render(request, 'liste_alumnis.html', {'alumnis': alumnis})
 @login_required

@@ -88,6 +88,8 @@ class Alumnis(models.Model):
     stage_3A_entreprise=models.CharField(max_length=30,default='*')
     emploi_secteur=models.CharField(max_length=30,default='*')
     emploi_entreprise=models.CharField(max_length=30,default='*')
+    emploi_ville=models.CharField(max_length=30,default='*')
+
     def __str__(self):
         return self.nom +' '+self.prenom
     
