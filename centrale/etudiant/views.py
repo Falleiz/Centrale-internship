@@ -258,7 +258,7 @@ def etudiant_portfolio(request,etudiant_id):
     etudiant = get_object_or_404(Users, pk=etudiant_id)
     try:
         portfolio = get_object_or_404(Portfolio, user=etudiant)
-        return render(request, 'portfolio.html', {'portfolio': portfolio})
+        return render(request, 'etudiant_portfolio.html', {'portfolio': portfolio})
     except :
         portfolio=Portfolio(user=etudiant)
         portfolio.save()
@@ -484,7 +484,7 @@ def ajouter_etudiant(request):
         form = UserForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('liste_etudiants')
+            return redirect('s_liste_etudiants')
     else:
         form = UserForm()
     return render(request, 'ajouter_etudiant.html', {'form': form})
@@ -496,7 +496,7 @@ def modifier_etudiant(request, pk):
         form = UserForm(request.POST, instance=etudiant)
         if form.is_valid():
             form.save()
-            return redirect('liste_etudiants')
+            return redirect('s_liste_etudiants')
     else:
         form = UserForm(instance=etudiant)
     return render(request, 'modifier_etudiant.html', {'form': form, 'etudiant': etudiant})
@@ -506,7 +506,7 @@ def supprimer_etudiant(request, pk):
     etudiant = get_object_or_404(Users, pk=pk)
     if request.method == 'POST':
         etudiant.delete()
-        return redirect('liste_etudiants')
+        return redirect('s_liste_etudiants')
     return render(request, 'supprimer_etudiant.html', {'etudiant': etudiant})
 
 
@@ -536,7 +536,7 @@ def ajouter_alumnis(request):
         form = AlumnisForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('liste_alumnis')
+            return redirect('s_liste_alumnis')
     else:
         form = AlumnisForm()
     return render(request, 'ajouter_alumnis.html', {'form': form})
@@ -548,7 +548,7 @@ def modifier_alumnis(request, pk):
         form = AlumnisForm(request.POST, request.FILES, instance=alumnis)
         if form.is_valid():
             form.save()
-            return redirect('liste_alumnis')
+            return redirect('s_liste_alumnis')
     else:
         form = AlumnisForm(instance=alumnis)
     return render(request, 'modifier_alumnis.html', {'form': form, 'alumnis': alumnis})
@@ -558,7 +558,7 @@ def supprimer_alumnis(request, pk):
     alumnis = get_object_or_404(Alumnis, pk=pk)
     if request.method == 'POST':
         alumnis.delete()
-        return redirect('liste_alumnis')
+        return redirect('s_liste_alumnis')
     return render(request, 'supprimer_alumnis.html', {'alumnis': alumnis})
 
 
@@ -711,3 +711,9 @@ def portfolio(request, etudiant_id):
         portfolio.save()
         portfolio = Portfolio.objects.filter(user=etudiant).last()
         return render(request, 'portfolio.html', {'portfolio': portfolio})
+
+
+#-----------------------------------------------------------------------------------------------------------------
+#-----------------------------------------------VUE DES BOTS---------------------------------------------------
+def analyse_cv(request):
+    return render(request,'analyseurCV.html')

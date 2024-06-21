@@ -22,7 +22,7 @@ urlpatterns =[
    path('personnaliser_profil/', views.personnaliser_profil, name='personnaliser_profil'),
    path('portfolio/<int:etudiant_id>/', views.portfolio, name='portfolio'),
    path('update_portfolio/<int:etudiant_id>/', views.update_portfolio, name='update_portfolio'),
-    path('etudiant_portfolio/<int:etudiant_id>/', views.etudiant_portfolio, name='etudiant_portfolio'),
+    path('etudiant_portfolio2/<int:etudiant_id>/', views.etudiant_portfolio, name='etudiant_portfolio2'),
 
    
    #---------------------------------------------------------------------------------------------------------------#
@@ -66,5 +66,8 @@ path('candidature/',views.all_candidature,name='all_candidature'),
 path('liste_etudiants/', views.liste_etudiants, name='r_liste_etudiants'),
 path('portfolio<int:etudiant_id>/',views.portfolio,name='portfolio'),
 
+#-----------------------------------------------------------------------------------
+#PARTIE BOT
+path('cv/',views.analyse_cv,name='cv'),
     
 ]
