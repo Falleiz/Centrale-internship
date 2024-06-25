@@ -131,3 +131,13 @@ class PortfolioForm(forms.ModelForm):
             'activites_extrascolaires': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Activités extrascolaires'}),
             'references': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Références'}),
         }
+
+
+
+from django import forms
+from .models import Sector
+
+class SectorForm(forms.ModelForm):
+    class Meta:
+        model = Sector
+        fields = ['name']

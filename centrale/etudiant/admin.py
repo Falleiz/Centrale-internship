@@ -70,4 +70,28 @@ class PortfolioAdmin(admin.ModelAdmin):
 
  
    
-   
+from django.contrib import admin
+
+# Register your models here.
+# chatbot/admin.py
+
+from django.contrib import admin
+from .models import Sector, InterviewSession, InterviewQuestion
+
+@admin.register(Sector)
+class SectorAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name')
+    search_fields = ('name',)
+
+@admin.register(InterviewSession)
+class InterviewSessionAdmin(admin.ModelAdmin):
+    list_display = ('id', 'user', 'sector', 'date')
+    list_filter = ('date', 'sector')
+    search_fields = ('user__username', 'sector__name')
+
+@admin.register(InterviewQuestion)
+class InterviewQuestionAdmin(admin.ModelAdmin):
+    list_display = ('id', 'session', 'question', 'score')
+    list_filter = ('session', 'score')
+    search_fields = ('question', 'user_response', 'feedback')
+

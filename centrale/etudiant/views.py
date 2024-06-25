@@ -717,3 +717,91 @@ def portfolio(request, etudiant_id):
 #-----------------------------------------------VUE DES BOTS---------------------------------------------------
 def analyse_cv(request):
     return render(request,'analyseurCV.html')
+
+
+#-------------------------------------------------------------------------------------------------------------------
+
+#-----------------------------------------------bot entretien---------------------------------------------------
+
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from .models import Sector, InterviewSession, InterviewQuestion
+from .utils import chat_with_gpt, generate_feedback_and_grade
+from gtts import gTTS
+from .forms import SectorForm
+import os
+from .models import User
+
+def select_sector(request):
+    sectors = Sector.objects.all()
+    if request.method == "POST":
+        sector_form = SectorForm(request.POST)
+        if sector_form.is_valid():
+            sector = sector_form.save()
+            secteur_name = sector.name
+            request.session['secteur_name'] = secteur_name
+            user=request.user
+            user_id=user.id
+            user=Users.objects.get(id=user_id)
+            session = InterviewSession.objects.create(user=user, sector=sector)
+            questions_and_messages_liste ={'question': [],'reponse' : []}
+            request.session['questions_and_messages_liste']=questions_and_messages_liste
+            return redirect('start_interview', session_id=session.id)
+    else:
+        sector_form = SectorForm()
+
+    return render(request, 'select_sector.html', {'sectors': sectors, 'sector_form': sector_form})
+
+def text_to_speech(text):
+    tts = gTTS(text=text, lang='fr',tld='fr')
+    audio_dir = 'static/audio'
+    if not os.path.exists(audio_dir):
+        os.makedirs(audio_dir)
+    audio_file = os.path.join(audio_dir, 'text_to_speech.mp3')
+    tts.save(audio_file)
+    return audio_file
+
+list_question_reponse={'question': [],'reponse':[]}
+
+def start_interview(request, session_id):
+    session = InterviewSession.objects.get(id=session_id)
+    question_num = int(request.POST.get('question_num', 0))
+    message = request.POST.get('response', '')
+    secteur = request.session['secteur_name']
+    
+    if question_num == 0 and not message:
+        introduction, question = chat_with_gpt(secteur, '', question_num)
+        audio_file = text_to_speech(introduction)
+        audio_url = f'/{audio_file}'
+        return render(request, 'interview.html', {'session': session, 'question_num': question_num, 'question': introduction, 'audio_url': audio_url})
+    
+    if message and question_num <12:
+        list_question_reponse['reponse'].append(message)
+        _, question = chat_with_gpt(secteur, message, question_num)
+        audio_file = text_to_speech(question)
+        audio_url = f'/{audio_file}'
+        question_num += 1
+        list_question_reponse['question'].append(question)
+        
+        
+        return render(request, 'interview.html', {'session': session, 'question_num': question_num, 'question': question, 'audio_url': audio_url})
+    list_question_reponse['reponse'].pop(0)
+    request.session['list_question_reponse']=list_question_reponse
+
+    return redirect('feedback')
+
+
+def feedback(request):
+    final_message = "Merci d'avoir participé à cet entretien de simulation. Nous allons maintenant vous fournir un retour détaillé et une note pour vos réponses. Bonne chance pour vos futurs entretiens !"
+    audio_file = text_to_speech(final_message)
+    audio_url = f'/{audio_file}'
+    list_question_reponse= request.session['list_question_reponse'] 
+    feedbacks = generate_feedback_and_grade(list_question_reponse)
+    return render(request, 'feedback.html', {'final_message':final_message,'feedbacks': feedbacks,'audio_url':audio_url})
+
+
+
+def history(request):
+    return render(request, 'history.html', )
+#    sessions = InterviewSession.objects.filter(user=request.user).order_by('-date')
+#{'sessions': sessions}

@@ -69,5 +69,10 @@ path('portfolio<int:etudiant_id>/',views.portfolio,name='portfolio'),
 #-----------------------------------------------------------------------------------
 #PARTIE BOT
 path('cv/',views.analyse_cv,name='cv'),
+path('sectors/', views.select_sector, name='select_sector'),
+path('start-interview/<int:session_id>/', views.start_interview, name='start_interview'),
+path('feedback/',views.feedback,name='feedback'),
+path('history/', views.history, name='history'),
+
     
 ]

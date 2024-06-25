@@ -148,3 +148,23 @@ class Portfolio(models.Model):
 
     def __str__(self):
         return self.user.first_name +''+self.user.last_name
+    
+#-------------------------------------------------------------------------------------------------------------------#
+#Partie BOT
+from django.db import models
+from django.contrib.auth.models import User
+
+class Sector(models.Model):
+    name = models.CharField(max_length=100)
+
+class InterviewSession(models.Model):
+    user = models.ForeignKey(Users, on_delete=models.CASCADE)
+    sector = models.ForeignKey(Sector, on_delete=models.CASCADE)
+    date = models.DateTimeField(auto_now_add=True)
+
+class InterviewQuestion(models.Model):
+    session = models.ForeignKey(InterviewSession, on_delete=models.CASCADE)
+    question = models.TextField()
+    user_response = models.TextField()
+    feedback = models.TextField()
+    score = models.FloatField()

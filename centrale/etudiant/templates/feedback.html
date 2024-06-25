@@ -1,0 +1,42 @@
+{% load static %}
+{% block title %}feedback{% endblock title %}
+{% block link %}
+<link rel="stylesheet" href="{% static 'css/log_out.css' %}">
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+<link rel="stylesheet" href="{% static 'css/feedback.css' %}">
+{% endblock link %}
+
+{% block content %}
+
+    <div class="container">
+        <h1>Feedback sur l'Entretien</h1>
+        <audio controls autoplay>
+            <source src="{{ audio_url }}" type="audio/mp3">
+            Votre navigateur ne supporte pas cette audio.
+        </audio>           
+        <h2>{{final_message}}</h2>
+        <div class="feedback-section positive-feedback">
+            <h2>Feedback Positif</h2>
+    
+                   
+                        <p>{{ feedbacks.1 }}</p><br><br>
+        </div>
+        <div class="feedback-section improvement-feedback">
+            <h2>Suggestions d'Amélioration</h2>
+          
+              
+                <p>{{ feedbacks.2 }}</p>
+        </div>
+
+        <div class="feedback-section final-grade">
+            <h2>Note Finale</h2>
+            <p>{{ feedbacks.4 }}</p>
+        </div>
+
+        <div class="feedback-section">
+            <h2>Encouragement</h2>
+            <p>{{ feedbacks.3 }}</p>
+        </div>
+    </div>
+
+{% endblock content %}
