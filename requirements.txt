@@ -6,8 +6,11 @@ attrs==23.2.0
 cachetools==5.3.3
 certifi==2024.6.2
 charset-normalizer==3.3.2
+click==8.1.7
 colorama==0.4.6
 dataclasses-json==0.6.7
+decouple==0.0.7
+dj-database-url==2.2.0
 Django==5.0.6
 django-phonenumber-field==7.3.0
 faiss-cpu==1.8.0
@@ -22,6 +25,7 @@ googleapis-common-protos==1.63.1
 greenlet==3.0.3
 grpcio==1.64.1
 grpcio-status==1.62.2
+gTTS==2.5.1
 httplib2==0.22.0
 idna==3.7
 joblib==1.4.2
@@ -70,4 +74,5 @@ typing_extensions==4.12.2
 tzdata==2024.1
 uritemplate==4.1.1
 urllib3==2.2.2
+whitenoise==6.7.0
 yarl==1.9.4
